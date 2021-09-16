@@ -1,5 +1,5 @@
-import UserProfile from "./UserProfile"
-import GameSelector from "./GameSelector"
+import UserProfile from "./UserProfile";
+import GameSelector from "./GameSelector";
 
 function Home() {
 	return (

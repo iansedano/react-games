@@ -1,6 +1,6 @@
-import TimesTableGame from "./Games/TimesTableGame/TimesTableGame"
-import ConnectFour from "./Games/ConnectFour/ConnectFour"
-import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame"
+import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
+import ConnectFour from "./Games/ConnectFour/ConnectFour";
+import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
 
 function GameSelector() {
 	return (
@@ -13,4 +13,4 @@ function GameSelector() {
 	);
 }
 
-export default GameSelector
+export default GameSelector;
