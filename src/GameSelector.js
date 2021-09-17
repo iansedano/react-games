@@ -1,14 +1,10 @@
-import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
-import ConnectFour from "./Games/ConnectFour/ConnectFour";
-import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
-
 function GameSelector() {
 	return (
 		<div>
 			GAME SELECTION:
-			<TimesTableGame />
-			<ConnectFour />
-			<GeneralKnowledgeGame />
+			<button>Times Tables</button>
+			<button>Connect Four</button>
+			<button>General Knowledge</button>
 		</div>
 	);
 }
