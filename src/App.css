@@ -6,32 +6,31 @@
 	--cn-sand: #f9cc3d;
 	--cn-yellow: #f4e660;
 	--cn-red: #ed1c24;
-	
+
 	font-family: "Roboto", sans-serif;
 	max-width: 1200px;
 }
-
 
 body {
 	--bg-col-1: var(--cn-yellow);
 	--bg-col-2: var(--cn-blue);
 	--bg-col-3: var(--cn-orange);
-	
+
 	--text-col: black;
 	--anchor-col: blue;
-	
+
 	background-color: var(--bg-col-1);
 	color: var(--text-col);
 }
 
 body.dark-mode {
-	--bg-col-1: #2e2e2e ;
+	--bg-col-1: #2e2e2e;
 	--bg-col-2: #597e99;
 	--bg-col-3: #879e56;
-	
+
 	--text-col: #d6d6d6;
 	--anchor-col: #e5b567;
-	
+
 	background-color: var(--bg-col-1);
 	color: var(--text-col);
 }
@@ -62,4 +61,3 @@ p,
 button {
 	margin: 10px;
 }
-
