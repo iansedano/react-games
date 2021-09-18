@@ -2,17 +2,64 @@
 
 :root {
 	--cn-blue: #0071bc;
-	--cn-orange-dark: #fbb03b;
-	--cn-orange-light: #f9cc3d;
+	--cn-orange: #fbb03b;
+	--cn-sand: #f9cc3d;
 	--cn-yellow: #f4e660;
 	--cn-red: #ed1c24;
+	
+	font-family: "Roboto", sans-serif;
+	max-width: 1200px;
 }
+
 
 body {
-	font-family: "Roboto", sans-serif;
-	background-color: var(--cn-yellow);
+	--bg-col-1: var(--cn-yellow);
+	--bg-col-2: var(--cn-blue);
+	--bg-col-3: var(--cn-orange);
+	
+	--text-col: black;
+	--anchor-col: blue;
+	
+	background-color: var(--bg-col-1);
+	color: var(--text-col);
 }
 
-.header {
-	background-color: var(--cn-blue);
+body.dark-mode {
+	--bg-col-1: #2e2e2e ;
+	--bg-col-2: #597e99;
+	--bg-col-3: #879e56;
+	
+	--text-col: #d6d6d6;
+	--anchor-col: #e5b567;
+	
+	background-color: var(--bg-col-1);
+	color: var(--text-col);
 }
+
+#root {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 50px 50px 50px 50px;
+}
+
+.header-bar {
+	background-color: var(--bg-col-2);
+	justify-content: space-between;
+}
+
+.game-selector {
+	background-color: var(--bg-col-3);
+	flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+button {
+	margin: 10px;
+}
+

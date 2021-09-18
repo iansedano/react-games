@@ -3,7 +3,7 @@ import GameSelector from "./GameSelector";
 
 function Home() {
 	return (
-		<div>
+		<div className="home full-width">
 			<UserProfile />
 			<GameSelector />
 		</div>

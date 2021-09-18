@@ -2,9 +2,11 @@ import Toggle from "./Components/Toggle";
 
 function HeaderBar() {
 	return (
-		<div className="header">
+		<div className="header-bar flex-center full-width">
 			<h3>Games</h3>
-			<Toggle />
+			<div className="flex-center">
+				<p>Toggle Dark Mode</p> <Toggle />
+			</div>
 		</div>
 	);
 }

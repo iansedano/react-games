@@ -3,5 +3,6 @@
         "*.js": "javascriptreact"
     },
 	
-	"editor.tabSize": 4
+	"editor.tabSize": 4,
+    "editor.formatOnSave": true
 }

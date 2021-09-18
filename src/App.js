@@ -2,13 +2,14 @@ import Home from "./Home";
 import HeaderBar from "./HeaderBar";
 
 import "./App.css";
+import "./Utility.css";
 
 function App() {
 	return (
-		<div>
+		<>
 			<HeaderBar />
 			<Home />
-		</div>
+		</>
 	);
 }
 
