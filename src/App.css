@@ -48,11 +48,13 @@ body.dark-mode {
 .header-bar {
 	background-color: var(--bg-col-2);
 	justify-content: space-between;
+	border-radius: 6px;
 }
 
 .game-selector {
 	background-color: var(--bg-col-3);
 	flex-direction: column;
+	border-radius: 6px;
 }
 
 h1,
