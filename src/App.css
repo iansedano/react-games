@@ -8,7 +8,6 @@
 	--cn-red: #ed1c24;
 
 	font-family: "Roboto", sans-serif;
-	max-width: 1200px;
 }
 
 body {
@@ -21,6 +20,9 @@ body {
 
 	background-color: var(--bg-col-1);
 	color: var(--text-col);
+
+	margin: auto;
+	max-width: 1200px;
 	transition: background-color 0.3s, color 0.3s;
 }
 
@@ -34,7 +36,6 @@ body.dark-mode {
 
 	background-color: var(--bg-col-1);
 	color: var(--text-col);
-	transition: background-color 0.3s, color 0.3s;
 }
 
 #root {
