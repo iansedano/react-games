@@ -1,25 +1,52 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useReducer, useState, useEffect } from "react";
 
 import Home from "./Home";
 import HeaderBar from "./HeaderBar";
 
+import reducer from "./Reducers/reducer";
+
 import "./App.css";
 import "./Utility.css";
 
-export const darkModeContext = createContext();
+export const globalState = createContext();
+
+const defaultState = {
+	siteSettings: {
+		darkMode: true,
+	},
+	user: {
+		name: null,
+		lastLogin: new Date(),
+		preferredGame: null,
+	},
+	games: {
+		timesTable: {},
+		connectFour: {},
+		generalKnowledge: {
+			timesPlayed: null,
+			settings: {
+				numberOfQuestions: 10,
+				difficulty: null,
+				sessionToken: null,
+			},
+			answers: [],
+		},
+	},
+};
 
 function App() {
-	const [darkMode, setDarkMode] = useState(false);
+	const [state, dispatch] = useReducer(reducer, defaultState);
 	useEffect(() => {
-		if (darkMode) {
+		if (state.siteSettings.darkMode) {
 			document.body.classList.add("dark-mode");
 		} else document.body.classList.remove("dark-mode");
 	});
 	return (
-		<darkModeContext.Provider value={setDarkMode}>
+		<globalState.Provider value={[state, dispatch]}>
 			<HeaderBar />
 			<Home />
-		</darkModeContext.Provider>
+			<HeaderBar className="footer" />
+		</globalState.Provider>
 	);
 }
 
