@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState, useEffect } from "react";
+import { createContext, useReducer, useEffect } from "react";
 
 import Home from "./Home";
 import HeaderBar from "./HeaderBar";
@@ -45,7 +45,7 @@ function App() {
 		<globalState.Provider value={[state, dispatch]}>
 			<HeaderBar />
 			<Home />
-			<HeaderBar className="footer" />
+			<HeaderBar />
 		</globalState.Provider>
 	);
 }
