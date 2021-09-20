@@ -55,6 +55,7 @@ body.dark-mode {
 	background-color: var(--bg-col-3);
 	flex-direction: column;
 	border-radius: 6px;
+	margin: 10px 0 10px 0;
 }
 
 h1,
