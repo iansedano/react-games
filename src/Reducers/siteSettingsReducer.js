@@ -9,6 +9,7 @@ function toggleDarkMode(state) {
 }
 
 function changePage(state, action) {
+	console.log("changing page");
 	const validPages = [
 		"home",
 		"timesTableGame",
@@ -16,7 +17,7 @@ function changePage(state, action) {
 		"generalKnowledgeGame",
 	];
 
-	if (!validPages.includes(action.type)) return new Error();
+	if (!validPages.includes(action.type)) return new Error("invalid page");
 
 	return {
 		...state,
