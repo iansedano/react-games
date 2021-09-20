@@ -13,7 +13,6 @@ function HeaderBar() {
 				<p>Toggle Dark Mode</p>
 				<Toggle
 					onChange={() => {
-						console.log("click");
 						dispatch({ type: "siteSettings/toggleDarkMode" });
 					}}
 					checked={state.siteSettings.darkMode}
