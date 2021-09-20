@@ -2,6 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 
 import Home from "./Home";
 import HeaderBar from "./HeaderBar";
+import PageNavButton from "./Components/PageNavButton";
 import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
 import ConnectFour from "./Games/ConnectFour/ConnectFour";
 import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
@@ -69,6 +70,9 @@ function App() {
 		<globalState.Provider value={[state, dispatch]}>
 			<HeaderBar />
 			{page}
+			{state.siteSettings.page !== "home" ? (
+				<PageNavButton page="home">Home</PageNavButton>
+			) : null}
 			<HeaderBar />
 		</globalState.Provider>
 	);
