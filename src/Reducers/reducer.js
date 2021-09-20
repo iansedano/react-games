@@ -65,7 +65,7 @@ function reducer(state, action) {
 		case "gameInfo":
 			return gameInfoReducer(state, actionWithShortenedType);
 		default:
-			throw new Error();
+			throw new Error("invalid root action type");
 	}
 }
 

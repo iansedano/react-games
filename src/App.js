@@ -2,6 +2,9 @@ import { createContext, useReducer, useEffect } from "react";
 
 import Home from "./Home";
 import HeaderBar from "./HeaderBar";
+import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
+import ConnectFour from "./Games/ConnectFour/ConnectFour";
+import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
 
 import reducer from "./Reducers/reducer";
 
@@ -13,6 +16,7 @@ export const globalState = createContext();
 const defaultState = {
 	siteSettings: {
 		darkMode: true,
+		page: "home",
 	},
 	user: {
 		name: null,
@@ -41,10 +45,30 @@ function App() {
 			document.body.classList.add("dark-mode");
 		} else document.body.classList.remove("dark-mode");
 	});
+
+	let page;
+
+	switch (state.siteSettings.page) {
+		case "home":
+			page = <Home />;
+			break;
+		case "timesTableGame":
+			page = <TimesTableGame />;
+			break;
+		case "connectFour":
+			page = <ConnectFour />;
+			break;
+		case "generalKnowledgeGame":
+			page = <GeneralKnowledgeGame />;
+			break;
+		default:
+			return new Error();
+	}
+
 	return (
 		<globalState.Provider value={[state, dispatch]}>
 			<HeaderBar />
-			<Home />
+			{page}
 			<HeaderBar />
 		</globalState.Provider>
 	);

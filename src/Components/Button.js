@@ -5,13 +5,13 @@ function Button(props) {
 
 	if (!props.src) {
 		jsx = (
-			<button className={styles.btn}>
+			<button className={styles.btn} onClick={props.onClick}>
 				<h3>{props.children}</h3>
 			</button>
 		);
 	} else if (props.src) {
 		jsx = (
-			<div className={styles.tooltip}>
+			<div className={styles.tooltip} onClick={props.onClick}>
 				<img
 					className={`${styles.img}`}
 					alt={props.children}
