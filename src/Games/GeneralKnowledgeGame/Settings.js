@@ -1,8 +1,15 @@
+import { useState } from "react";
 import Button from "./../../Components/Button";
 
 //https://reactjs.org/docs/forms.html
 
 function Settings({ settings, dispatch }) {
+	const [formState, setFormState] = useState({
+		numberOfQuestions: settings.numberOfQuestions,
+		difficulty: settings.difficulty,
+		category: settings.category,
+	});
+
 	return (
 		<div className="stat-form flex-center">
 			<label for="numberOfQuestionsInput">Number of Questions</label>
@@ -10,14 +17,24 @@ function Settings({ settings, dispatch }) {
 				type="text"
 				id="numberOfQuestionsInput"
 				name="numberOfQuestionsInput"
+				value={formState.numberOfQuestions}
 			/>
 			<label for="categoryChoiceInput">Category</label>
-			<input list="categories" id="categoryChoiceInput" />
+			<input
+				list="categories"
+				id="categoryChoiceInput"
+				value={formState.category}
+			/>
 			<datalist id="categories">
 				<option value="entertainment" />
 			</datalist>
 			<label for="difficultyInput">Difficulty</label>
-			<input type="text" id="difficultyInput" name="difficultyInput" />
+			<input
+				type="text"
+				id="difficultyInput"
+				name="difficultyInput"
+				value={formState.difficulty}
+			/>
 			<Button
 				onClick={() => {
 					dispatch({
