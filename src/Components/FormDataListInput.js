@@ -1,10 +1,13 @@
 function FormDataListInput(props) {
 	return (
 		<>
-			<input list={props.name} value={props.value} />
+			<input
+				list={props.name}
+				defaultValue={props.value === null ? "" : props.value}
+			/>
 			<datalist id={props.name}>
 				{props.options.map((option) => (
-					<option value={option} />
+					<option key={`${props.name}-${option}`} value={option} />
 				))}
 			</datalist>
 		</>

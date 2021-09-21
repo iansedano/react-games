@@ -15,8 +15,15 @@ function Settings({ settings, dispatch }) {
 	const difficultyOptions = ["Hard", "Medium", "Easy"];
 	const categoryOptions = ["Entertainment", "Science", "History"];
 
+	const changeHandler = (e) => {
+		const assigner = {};
+		assigner[e.target.name] = e.target.value;
+		const newState = Object.assign({ ...formState }, assigner);
+		setFormState(() => newState);
+	};
+
 	return (
-		<div className="stat-form flex-center">
+		<div className="stat-form flex-center" onChange={changeHandler}>
 			<FormTextInput
 				name="numberOfQuestions"
 				value={formState.numberOfQuestions}

@@ -11,7 +11,6 @@ import reducer from "./Reducers/reducer";
 
 import "./App.css";
 import "./Utility.css";
-import { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED } from "react";
 
 export const globalState = createContext();
 
