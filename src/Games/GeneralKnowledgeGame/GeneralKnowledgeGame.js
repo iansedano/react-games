@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 
 import Settings from "./Settings";
 import Stats from "./Stats";
@@ -11,13 +11,26 @@ import "./GeneralKnowledgeGame.css";
 
 function GeneralKnowledgeGame() {
 	const [state, reducer] = useContext(globalState);
+	const [isPlaying, setIsPlaying] = useState(false);
 	const GKState = state.games.generalKnowledge;
 	return (
 		<div className="flex-center">
-			<Settings data={GKState.settings} reducer={reducer} />
-			<Stats data={GKState.answers} />
-			<Button> Start Game </Button>
-			<Game />
+			{isPlaying ? (
+				<>
+					<Game />
+					<Button onClick={() => setIsPlaying((p) => !p)}>
+						Quit Game
+					</Button>
+				</>
+			) : (
+				<>
+					<Settings data={GKState.settings} reducer={reducer} />
+					<Stats data={GKState.answers} />
+					<Button onClick={() => setIsPlaying((p) => !p)}>
+						Start Game
+					</Button>
+				</>
+			)}
 		</div>
 	);
 }
