@@ -17,7 +17,7 @@ export const globalState = createContext();
 const defaultState = {
 	siteSettings: {
 		darkMode: true,
-		page: "home",
+		page: "generalKnowledgeGame",
 	},
 	user: {
 		name: null,
