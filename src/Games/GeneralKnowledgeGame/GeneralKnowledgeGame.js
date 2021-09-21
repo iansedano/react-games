@@ -17,7 +17,11 @@ function GeneralKnowledgeGame() {
 		<div className="flex-center">
 			{isPlaying ? (
 				<>
-					<Game />
+					<Game
+						difficulty={GKState.settings.difficulty}
+						category={GKState.settings.category}
+						numberOfQuestions={GKState.settings.numberOfQuestions}
+					/>
 					<Button onClick={() => setIsPlaying((p) => !p)}>
 						Quit Game
 					</Button>
