@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Button from "./../../Components/Button";
+import FormTextInput from "./../../Components/FormTextInput";
+import FormDataListInput from "./../../Components/FormDataListInput";
 
 //https://reactjs.org/docs/forms.html
 
@@ -10,31 +12,31 @@ function Settings({ settings, dispatch }) {
 		category: settings.category,
 	});
 
+	const difficultyOptions = ["Hard", "Medium", "Easy"];
+	const categoryOptions = ["Entertainment", "Science", "History"];
+
 	return (
 		<div className="stat-form flex-center">
-			<label for="numberOfQuestionsInput">Number of Questions</label>
-			<input
-				type="text"
-				id="numberOfQuestionsInput"
-				name="numberOfQuestionsInput"
+			<FormTextInput
+				name="numberOfQuestions"
 				value={formState.numberOfQuestions}
-			/>
-			<label for="categoryChoiceInput">Category</label>
-			<input
-				list="categories"
-				id="categoryChoiceInput"
-				value={formState.category}
-			/>
-			<datalist id="categories">
-				<option value="entertainment" />
-			</datalist>
-			<label for="difficultyInput">Difficulty</label>
-			<input
-				type="text"
-				id="difficultyInput"
-				name="difficultyInput"
+			>
+				Number of Questions
+			</FormTextInput>
+			<FormDataListInput
+				name="difficulty"
 				value={formState.difficulty}
-			/>
+				options={difficultyOptions}
+			>
+				Difficulty
+			</FormDataListInput>
+			<FormDataListInput
+				name="category"
+				value={formState.category}
+				options={categoryOptions}
+			>
+				Category
+			</FormDataListInput>
 			<Button
 				onClick={() => {
 					dispatch({

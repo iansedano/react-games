@@ -1,8 +1,8 @@
 function FormTextInput(props) {
 	return (
 		<>
-			<label for={props.identifier}>{props.children}</label>
-			<input type="text" name={props.identifier} value={props.value} />
+			<label for={props.name}>{props.children}</label>
+			<input type="text" name={props.name} value={props.value} />
 		</>
 	);
 }

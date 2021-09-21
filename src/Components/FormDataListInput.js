@@ -1,8 +1,8 @@
 function FormDataListInput(props) {
 	return (
 		<>
-			<input list={props.id} id={props.id} value={props.value} />
-			<datalist id={props.id}>
+			<input list={props.name} value={props.value} />
+			<datalist id={props.name}>
 				{props.options.map((option) => (
 					<option value={option} />
 				))}
