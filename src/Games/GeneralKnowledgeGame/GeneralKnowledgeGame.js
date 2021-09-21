@@ -10,7 +10,7 @@ import { globalState } from "./../../App";
 import "./GeneralKnowledgeGame.css";
 
 function GeneralKnowledgeGame() {
-	const [state, reducer] = useContext(globalState);
+	const [state, dispatch] = useContext(globalState);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const GKState = state.games.generalKnowledge;
 	return (
@@ -28,8 +28,8 @@ function GeneralKnowledgeGame() {
 				</>
 			) : (
 				<>
-					<Settings data={GKState.settings} reducer={reducer} />
-					<Stats data={GKState.answers} />
+					<Settings settings={GKState.settings} dispatch={dispatch} />
+					<Stats answers={GKState.answers} />
 					<Button onClick={() => setIsPlaying((p) => !p)}>
 						Start Game
 					</Button>
