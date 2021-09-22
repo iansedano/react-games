@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./../../Components/Button";
 import FormTextInput from "./../../Components/FormTextInput";
 import FormDataListInput from "./../../Components/FormDataListInput";
@@ -12,8 +12,20 @@ function Settings({ settings, dispatch }) {
 		category: settings.category,
 	});
 
+	const [categoryOptions, setCategoryOptions] = useState([
+		"awaiting response from server",
+	]);
+
+	useEffect(() => {
+		const req = async () => {
+			const resp = await fetch("https://opentdb.com/api_category.php");
+			const json = await resp.json();
+			setCategoryOptions(json.trivia_categories);
+		};
+		req();
+	}, []);
+
 	const difficultyOptions = ["Hard", "Medium", "Easy"];
-	const categoryOptions = ["Entertainment", "Science", "History"];
 
 	const changeHandler = (e) => {
 		const assigner = {};
@@ -40,7 +52,7 @@ function Settings({ settings, dispatch }) {
 			<FormDataListInput
 				name="category"
 				value={formState.category}
-				options={categoryOptions}
+				options={categoryOptions.map((option) => option.name).sort()}
 			>
 				Category
 			</FormDataListInput>
@@ -48,11 +60,7 @@ function Settings({ settings, dispatch }) {
 				onClick={() => {
 					dispatch({
 						type: "gameInfo/generalKnowledgeGame/updateSettings",
-						payload: {
-							numberOfQuestions: "",
-							difficulty: "",
-							category: null,
-						},
+						payload: formState,
 					});
 				}}
 			>
