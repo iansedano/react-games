@@ -6,14 +6,14 @@ function FormDataListInput(props) {
 	};
 	return (
 		<>
-			<label htmlFor={`${props.name}Choice`}>{props.children}</label>
+			<label htmlFor={props.name}>{props.children}</label>
 			<input
-				list={props.name}
-				name={`${props.name}Choice`}
+				list={`${props.name}List`}
+				name={props.name}
 				defaultValue={props.value === null ? "" : props.value}
 				onBlur={validator}
 			/>
-			<datalist id={props.name}>
+			<datalist id={`${props.name}List`}>
 				{props.options.map((option) => (
 					<option key={`${props.name}-${option}`} value={option} />
 				))}
