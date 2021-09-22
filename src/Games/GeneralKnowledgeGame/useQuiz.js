@@ -1,5 +1,18 @@
 import { useState, useEffect } from "react";
 
+// {
+// 	category: "Entertainment: Film",
+// 	type: "multiple",
+// 	difficulty: "medium",
+// 	question: "What was Marilyn Monroe`s character&#039;s first name in the film &quot;Some Like It Hot&quot;?",
+// 	correct_answer: "Sugar",
+// 	incorrect_answers: [
+// 		"Honey",
+// 		"Caramel",
+// 		"Candy"
+// 	]
+// }
+
 function useQuiz(difficulty, category, numberOfQuestions) {
 	const [questions, setQuestions] = useState(["making request"]);
 	const [answers, setAnswers] = useState([]);
@@ -11,6 +24,9 @@ function useQuiz(difficulty, category, numberOfQuestions) {
 				urlBuilder(difficulty, category, numberOfQuestions)
 			);
 			const json = await resp.json();
+			const questions = json.results.map((q) => {
+				return { ...q, question: q.question };
+			});
 			setQuestions(json.results);
 		}
 		req();
@@ -19,10 +35,10 @@ function useQuiz(difficulty, category, numberOfQuestions) {
 	const answerQuestion = (answerGiven) => {
 		const currentQuestion = questions[questions.length - 1];
 		if (answerGiven === currentQuestion[0] * currentQuestion[1]) {
-			setAnswer([...answers, [1, timeTaken]]);
+			setAnswers([...answers, [1]]);
 			refreshQuestion();
 		} else {
-			setAnswer([...answers, [0, timeTaken]]);
+			setAnswer([...answers, [0]]);
 		}
 	};
 
