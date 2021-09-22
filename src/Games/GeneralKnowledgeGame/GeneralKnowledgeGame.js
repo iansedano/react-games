@@ -21,6 +21,7 @@ function GeneralKnowledgeGame() {
 						difficulty={GKState.settings.difficulty}
 						category={GKState.settings.category}
 						numberOfQuestions={GKState.settings.numberOfQuestions}
+						setIsPlaying={setIsPlaying}
 					/>
 					<Button onClick={() => setIsPlaying((p) => !p)}>
 						Quit Game

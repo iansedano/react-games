@@ -1,11 +1,12 @@
 import Question from "./Question";
 import useQuiz from "./useQuiz";
 
-function Game({ difficulty, category, numberOfQuestions }) {
-	const [currentQuestion, answers, answerQuestion] = useQuiz(
+function Game({ difficulty, category, numberOfQuestions, setIsPlaying }) {
+	const [currentQuestion, answerQuestion] = useQuiz(
 		difficulty,
 		category,
-		numberOfQuestions
+		numberOfQuestions,
+		setIsPlaying
 	);
 
 	return (

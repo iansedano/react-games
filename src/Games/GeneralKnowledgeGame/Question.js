@@ -11,11 +11,11 @@
 // 	]
 // }
 
-function MultipleChoiceQuestion({ question, answerQuestion }) {
+function MultipleChoiceQuestion({ question }) {
 	const randomIndex = Math.floor(Math.random() * 4);
 	let answerList = [...question.incorrect_answers]; // doing this on same line as below does not work because splice returns removed items.
 	answerList.splice(randomIndex, 0, question.correct_answer);
-	console.log(answerList);
+
 	return (
 		<>
 			<h3>{question.question}</h3>
@@ -26,7 +26,7 @@ function MultipleChoiceQuestion({ question, answerQuestion }) {
 	);
 }
 
-function BooleanQuestion({ question, answerQuestion }) {
+function BooleanQuestion({ question }) {
 	return (
 		<>
 			<h3>{question.question}</h3>
@@ -37,8 +37,12 @@ function BooleanQuestion({ question, answerQuestion }) {
 }
 
 function Question({ question, answerQuestion }) {
+	function handleClick(e) {
+		answerQuestion(e.target.innerText);
+	}
+
 	return (
-		<div>
+		<div className="question" onClick={handleClick}>
 			{question.type === "multiple" ? (
 				<MultipleChoiceQuestion
 					question={question}

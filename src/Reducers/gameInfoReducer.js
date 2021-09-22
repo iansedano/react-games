@@ -14,6 +14,20 @@ function updateGeneralKnowledgeGame(state, action) {
 					},
 				},
 			};
+		case "addAnswers":
+			return {
+				...state,
+				games: {
+					...state.games,
+					generalKnowledge: {
+						...state.games.generalKnowledge,
+						answers: [
+							...state.games.generalKnowledge.answers,
+							...action.payload,
+						],
+					},
+				},
+			};
 		default:
 			return new Error("invalid general knowledge game action");
 	}

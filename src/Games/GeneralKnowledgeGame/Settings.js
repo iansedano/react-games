@@ -25,7 +25,7 @@ function Settings({ settings, dispatch }) {
 		req();
 	}, []);
 
-	const difficultyOptions = ["Hard", "Medium", "Easy"];
+	const difficultyOptions = ["hard", "medium", "easy"];
 
 	const changeHandler = (e) => {
 		const assigner = {};
