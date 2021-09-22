@@ -50,7 +50,6 @@ import userInfoReducer from "./userInfoReducer";
 import gameInfoReducer from "./gameInfoReducer";
 
 function reducer(state, action) {
-	console.log({ state });
 	const splitAction = action.type.split("/");
 	const actionWithShortenedType = {
 		...action,
@@ -58,7 +57,6 @@ function reducer(state, action) {
 	};
 	switch (splitAction[0]) {
 		case "siteSettings":
-			console.log({ actionWithShortenedType });
 			return siteSettingsReducer(state, actionWithShortenedType);
 		case "userInfo":
 			return userInfoReducer(state, actionWithShortenedType);

@@ -9,7 +9,6 @@ function toggleDarkMode(state) {
 }
 
 function changePage(state, action) {
-	console.log("changing page");
 	const validPages = [
 		"home",
 		"timesTableGame",
@@ -27,7 +26,6 @@ function changePage(state, action) {
 
 function siteSettingsReducer(state, action) {
 	const splitAction = action.type.split("/");
-	console.log({ splitAction });
 	const actionWithShortenedType = {
 		...action,
 		type: splitAction.slice(1).join("/"),

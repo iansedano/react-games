@@ -5,7 +5,6 @@ import Toggle from "./Components/Toggle";
 
 function HeaderBar() {
 	const [state, dispatch] = useContext(globalState);
-	console.log({ state });
 	return (
 		<div className="header-bar flex-center full-width">
 			<h3>Games</h3>
