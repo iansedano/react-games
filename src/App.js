@@ -16,8 +16,8 @@ export const globalState = createContext();
 
 const defaultState = {
 	siteSettings: {
-		darkMode: true,
-		page: "generalKnowledgeGame",
+		darkMode: false,
+		page: "home",
 	},
 	user: {
 		name: null,
@@ -40,8 +40,17 @@ const defaultState = {
 	},
 };
 
+const localStorageKey = "USER_DATA";
+
 function App() {
-	const [state, dispatch] = useReducer(reducer, defaultState);
+	const [state, dispatch] = useReducer(reducer, defaultState, (init) => {
+		return JSON.parse(localStorage.getItem(localStorageKey)) || init;
+	});
+
+	useEffect(() => {
+		localStorage.setItem(localStorageKey, JSON.stringify(state));
+	}, [state]);
+
 	useEffect(() => {
 		if (state.siteSettings.darkMode) {
 			document.body.classList.add("dark-mode");
