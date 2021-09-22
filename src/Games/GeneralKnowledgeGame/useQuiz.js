@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import he from "he";
 
 // {
 // 	category: "Entertainment: Film",
@@ -13,6 +14,16 @@ import { useState, useEffect } from "react";
 // 	]
 // }
 
+function urlBuilder(difficulty, category, numberOfQuestions) {
+	const root = "https://opentdb.com/api.php?";
+	const params = [
+		difficulty ? `difficulty=${difficulty}` : "",
+		category ? `category=${category}` : "",
+		numberOfQuestions ? `amount=${numberOfQuestions}` : "",
+	];
+	return root + params.join("");
+}
+
 function useQuiz(difficulty, category, numberOfQuestions) {
 	const [questions, setQuestions] = useState(["making request"]);
 	const [answers, setAnswers] = useState([]);
@@ -25,24 +36,23 @@ function useQuiz(difficulty, category, numberOfQuestions) {
 			);
 			const json = await resp.json();
 			const questions = json.results.map((q) => {
-				return { ...q, question: q.question };
+				return { ...q, question: he.decode(q.question) };
 			});
-			setQuestions(json.results);
+			setQuestions(questions);
 		}
 		req();
 	}, [difficulty, category, numberOfQuestions]);
 
 	const answerQuestion = (answerGiven) => {
-		const currentQuestion = questions[questions.length - 1];
-		if (answerGiven === currentQuestion[0] * currentQuestion[1]) {
-			setAnswers([...answers, [1]]);
-			refreshQuestion();
+		if (answerGiven === questions[currentQuestion].correct_answer) {
+			setAnswers((arr) => [...arr, 1]);
 		} else {
-			setAnswer([...answers, [0]]);
+			setAnswers((arr) => [...arr, 0]);
 		}
+		setCurrentQuestion((c) => c + 1);
 	};
 
-	return [questions, answers, answerQuestion];
+	return [questions[currentQuestion], answers, answerQuestion];
 }
 
-export default useQuiz();
+export default useQuiz;
