@@ -1,13 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
+html {
+	font-family: "Roboto", sans-serif;
+}
+
 :root {
 	--cn-blue: #0071bc;
 	--cn-orange: #fbb03b;
 	--cn-sand: #f9cc3d;
 	--cn-yellow: #f4e660;
 	--cn-red: #ed1c24;
-
-	font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -64,6 +66,18 @@ h3,
 h4,
 h5,
 p,
-button {
+button,
+input,
+label {
 	margin: 10px;
+}
+
+input,
+label {
+	font-size: 1.5em;
+}
+
+input {
+	border-radius: 6px;
+	text-align: center;
 }
