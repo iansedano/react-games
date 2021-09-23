@@ -78,12 +78,14 @@ function App() {
 
 	return (
 		<globalState.Provider value={[state, dispatch]}>
-			<HeaderBar />
-			{page}
-			{state.siteSettings.page !== "home" ? (
-				<PageNavButton page="home">Home</PageNavButton>
-			) : null}
-			<HeaderBar />
+			<main className="flex-center">
+				<HeaderBar />
+				{page}
+				{state.siteSettings.page !== "home" ? (
+					<PageNavButton page="home">Home</PageNavButton>
+				) : null}
+				<HeaderBar />
+			</main>
 		</globalState.Provider>
 	);
 }

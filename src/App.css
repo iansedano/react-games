@@ -40,6 +40,13 @@ body.dark-mode {
 	color: var(--text-col);
 }
 
+main {
+	width: 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 80vh;
+}
+
 #root {
 	display: flex;
 	flex-direction: column;
