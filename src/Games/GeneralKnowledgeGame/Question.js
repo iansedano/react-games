@@ -43,7 +43,9 @@ function Question({ question, answerQuestion }) {
 
 	return (
 		<div className="question" onClick={handleClick}>
-			{question.type === "multiple" ? (
+			{!question ? (
+				<h3>End of Quiz!</h3>
+			) : question.type === "multiple" ? (
 				<MultipleChoiceQuestion
 					question={question}
 					answerQuestion={answerQuestion}

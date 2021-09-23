@@ -22,7 +22,7 @@ function urlBuilder(difficulty, category, numberOfQuestions) {
 		category ? `category=${category}` : "",
 		numberOfQuestions ? `amount=${numberOfQuestions}` : "",
 	];
-	return root + params.join("&");
+	return root + params.filter((e) => e !== "").join("&");
 }
 
 function useQuiz(difficulty, category, numberOfQuestions) {
@@ -57,20 +57,20 @@ function useQuiz(difficulty, category, numberOfQuestions) {
 	}, [difficulty, category, numberOfQuestions]);
 
 	const answerQuestion = (answerGiven) => {
-		if (currentQuestion === questions.length) {
-			dispatch({
-				type: "gameInfo/generalKnowledgeGame/addAnswers",
-				payload: [answers],
-			});
-			return;
-		}
-
 		if (answerGiven === questions[currentQuestion].correct_answer) {
 			setAnswers((arr) => [...arr, 1]);
 		} else {
 			setAnswers((arr) => [...arr, 0]);
 		}
+
 		setCurrentQuestion((c) => c + 1);
+
+		if (currentQuestion === questions.length) {
+			dispatch({
+				type: "gameInfo/generalKnowledgeGame/addAnswers",
+				payload: answers,
+			});
+		}
 	};
 
 	return [questions[currentQuestion], answerQuestion];
