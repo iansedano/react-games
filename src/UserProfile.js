@@ -1,3 +1,7 @@
+// https://avatars.dicebear.com/docs/http-api
+// `https://avatars.dicebear.com/api/bottts/${name}.svg`
+import { useContext } from "react";
+
 function UserProfile() {
 	return (
 		<div className="flex-center user-profile">
