@@ -7,6 +7,13 @@ function FormSelectInput({
 	children,
 	onChange,
 }) {
+	console.log(
+		(() => {
+			if (value != null) return value;
+			if (defaultValue != null) return defaultValue;
+			return null;
+		})()
+	);
 	return (
 		<>
 			<label htmlFor={name}>{children}</label>
@@ -26,9 +33,8 @@ function FormSelectInput({
 					<option
 						key={`${name}-${optionName}`}
 						value={optionValues ? optionValues[i] : optionName}
-					>
-						{optionName}
-					</option>
+						label={optionName}
+					/>
 				))}
 			</select>
 		</>
