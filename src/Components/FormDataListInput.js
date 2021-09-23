@@ -1,21 +1,41 @@
-function FormDataListInput(props) {
+function FormDataListInput({
+	options,
+	name,
+	children,
+	value,
+	defaultValue,
+	onChange,
+	realValues,
+}) {
 	const validator = (e) => {
-		if (!props.options.includes(e.target.value)) {
+		if (!options.includes(e.target.value)) {
 			e.target.style.backgroundColor = "pink";
 		} else e.target.style.backgroundColor = "";
 	};
+
 	return (
 		<>
-			<label htmlFor={props.name}>{props.children}</label>
+			<label htmlFor={name}>{children}</label>
 			<input
-				list={`${props.name}List`}
-				name={props.name}
-				defaultValue={props.value === null ? "" : props.value}
+				list={`${name}List`}
+				name={name}
+				defaultValue={
+					value != null
+						? value
+						: defaultValue != null
+						? defaultValue
+						: ""
+				}
 				onBlur={validator}
+				onChange={onChange || null}
 			/>
-			<datalist id={`${props.name}List`}>
-				{props.options.map((option) => (
-					<option key={`${props.name}-${option}`} value={option} />
+			<datalist id={`${name}List`}>
+				{options.map((option, i) => (
+					<option
+						key={`${name}-${option}`}
+						value={option}
+						data-value={realValues ? realValues[i] : option}
+					/>
 				))}
 			</datalist>
 		</>

@@ -28,8 +28,9 @@ function Settings({ settings, dispatch }) {
 	const difficultyOptions = ["hard", "medium", "easy"];
 
 	const changeHandler = (e) => {
+		console.log(e);
 		const assigner = {};
-		assigner[e.target.name] = e.target.value;
+		assigner[e.target.name] = e.target["data-value"];
 		const newState = Object.assign({ ...formState }, assigner);
 		setFormState(() => newState);
 	};
@@ -52,7 +53,8 @@ function Settings({ settings, dispatch }) {
 			<FormDataListInput
 				name="category"
 				value={formState.category}
-				options={categoryOptions.map((option) => option.name).sort()}
+				options={categoryOptions.map((option) => option.name)}
+				realValues={categoryOptions.map((option) => option.id)}
 			>
 				Category
 			</FormDataListInput>
