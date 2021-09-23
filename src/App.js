@@ -77,7 +77,7 @@ function App() {
 	}
 
 	return (
-		<globalState.Provider value={[state, dispatch]}>
+		<globalState.Provider value={{ state, dispatch }}>
 			<main className="flex-center">
 				<HeaderBar />
 				{page}

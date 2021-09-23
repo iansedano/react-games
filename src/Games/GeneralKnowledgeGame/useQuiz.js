@@ -26,7 +26,7 @@ function urlBuilder(difficulty, category, numberOfQuestions) {
 }
 
 function useQuiz(difficulty, category, numberOfQuestions) {
-	const [state, dispatch] = useContext(globalState);
+	const { dispatch } = useContext(globalState);
 	const [questions, setQuestions] = useState(["making request"]);
 	const [answers, setAnswers] = useState([]);
 	const [currentQuestion, setCurrentQuestion] = useState(0);

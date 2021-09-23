@@ -10,7 +10,7 @@ import { globalState } from "./../../App";
 import "./GeneralKnowledgeGame.css";
 
 function GeneralKnowledgeGame() {
-	const [state, dispatch] = useContext(globalState);
+	const { state, dispatch } = useContext(globalState);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const GKState = state.games.generalKnowledge;
 	return (

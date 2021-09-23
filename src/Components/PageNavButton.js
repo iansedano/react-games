@@ -4,7 +4,7 @@ import Button from "./Button";
 import { globalState } from "./../App";
 
 function PageNavButton({ src, page, children }) {
-	const dispatch = useContext(globalState)[1];
+	const { dispatch } = useContext(globalState);
 
 	return (
 		<Button
