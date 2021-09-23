@@ -39,8 +39,6 @@ function Settings({ settings, dispatch }) {
 		setFormState(e.target.id, e.target.value);
 	};
 
-	console.log("formstatecat", formState.category);
-
 	return (
 		<div className="stat-form flex-center" onChange={changeHandler}>
 			<FormTextInput
