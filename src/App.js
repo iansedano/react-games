@@ -20,15 +20,15 @@ const defaultState = {
 		page: "home",
 	},
 	user: {
-		name: null,
+		name: "Nomad",
 		lastLogin: new Date(),
 		preferredGame: null,
 	},
 	games: {
-		timesTable: {},
-		connectFour: {},
+		timesTable: { timesPlayed: 0 },
+		connectFour: { timesPlayed: 0 },
 		generalKnowledge: {
-			timesPlayed: null,
+			timesPlayed: 0,
 			settings: {
 				numberOfQuestions: 10,
 				difficulty: null,

@@ -22,6 +22,7 @@ function urlBuilder(difficulty, category, numberOfQuestions) {
 		category ? `category=${category}` : "",
 		numberOfQuestions ? `amount=${numberOfQuestions}` : "",
 	];
+	console.log(root + params.filter((e) => e !== "").join("&"));
 	return root + params.filter((e) => e !== "").join("&");
 }
 

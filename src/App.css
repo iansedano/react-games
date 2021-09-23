@@ -73,6 +73,10 @@ main {
 	margin: 0 0 50px 0;
 }
 
+.user-avatar {
+	height: 10em;
+}
+
 h1,
 h2,
 h3,
