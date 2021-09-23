@@ -1,35 +1,33 @@
 function FormSelectInput({
-	options,
-	optionValues,
 	name,
-	children,
+	optionNames,
+	optionValues,
 	value,
 	defaultValue,
+	children,
 	onChange,
 }) {
 	return (
 		<>
 			<label htmlFor={name}>{children}</label>
 			<select
-				id={`${name}`}
-				defaultValue={
-					value != null
-						? value
-						: defaultValue != null
-						? defaultValue
-						: null
-				}
+				id={name}
+				defaultValue={(() => {
+					if (value != null) return value;
+					if (defaultValue != null) return defaultValue;
+					return null;
+				})()}
 				onChange={onChange || null}
 			>
 				{defaultValue ? (
 					<option value={defaultValue}>{defaultValue}</option>
 				) : null}
-				{options.map((option, i) => (
+				{optionNames.map((optionName, i) => (
 					<option
-						key={`${name}-${option}`}
-						value={optionValues ? optionValues[i] : option}
+						key={`${name}-${optionName}`}
+						value={optionValues ? optionValues[i] : optionName}
 					>
-						{option}
+						{optionName}
 					</option>
 				))}
 			</select>

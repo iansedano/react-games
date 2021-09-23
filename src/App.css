@@ -85,16 +85,19 @@ h5,
 p,
 button,
 input,
-label {
+label,
+select {
 	margin: 10px;
 }
 
 input,
-label {
+label,
+select {
 	font-size: 1.5em;
 }
 
-input {
+input,
+select {
 	border-radius: 6px;
 	text-align: center;
 }

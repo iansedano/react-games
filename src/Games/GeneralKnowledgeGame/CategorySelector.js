@@ -1,18 +1,22 @@
-<FormSelectInput
-	name="category"
-	value={formState.category}
-	options={categoryOptions.map((option) => option.name)}
-	optionValues={categoryOptions.map((option) => option.id)}
-	defaultValue="Any"
-></FormSelectInput>;
+import FormSelectInput from "./../../Components/FormSelectInput";
 
-function CategorySelector({ categoryOptions }) {
+function CategorySelector({ selectedCategory, categoryOptions }) {
+	categoryOptions.sort((a, b) => (a.name < b.name ? -1 : 1));
+
+	const categoryNames = categoryOptions.map((option) => option.name);
+	const categoryIds = categoryOptions.map((option) => option.id);
+
 	return (
-		<label htmlFor="categorySelector"></label>
-		<select name="" id="">
-			<option value=""></option>
-		</select>
-	)
+		<FormSelectInput
+			name="category"
+			value={selectedCategory}
+			optionNames={categoryNames}
+			optionValues={categoryIds}
+			defaultValue="Any"
+		>
+			Category
+		</FormSelectInput>
+	);
 }
 
 export default CategorySelector;

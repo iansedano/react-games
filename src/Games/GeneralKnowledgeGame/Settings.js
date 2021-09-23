@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+
 import useGameSettings from "./useGameSettings";
+import CategorySelector from "./CategorySelector";
+
 import Button from "./../../Components/Button";
 import FormTextInput from "./../../Components/FormTextInput";
 import FormSelectInput from "./../../Components/FormSelectInput";
@@ -31,6 +34,8 @@ function Settings({ settings, dispatch }) {
 		setFormState(e.target.id, e.target.value);
 	};
 
+	console.log("formstatecat", formState.category);
+
 	return (
 		<div className="stat-form flex-center" onChange={changeHandler}>
 			<FormTextInput
@@ -42,20 +47,15 @@ function Settings({ settings, dispatch }) {
 			<FormSelectInput
 				name="difficulty"
 				value={formState.difficulty}
-				options={difficultyOptions}
+				optionNames={difficultyOptions}
 				defaultValue="Any"
 			>
 				Difficulty
 			</FormSelectInput>
-			<FormSelectInput
-				name="category"
-				value={formState.category}
-				options={categoryOptions.map((option) => option.name)}
-				optionValues={categoryOptions.map((option) => option.id)}
-				defaultValue="Any"
-			>
-				Category
-			</FormSelectInput>
+			<CategorySelector
+				selectedCategory={formState.category}
+				categoryOptions={categoryOptions}
+			/>
 			<Button onClick={() => saveSettings(dispatch, formState)}>
 				Save Settings
 			</Button>

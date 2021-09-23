@@ -1,8 +1,8 @@
-function FormTextInput(props) {
+function FormTextInput({ name, children, value }) {
 	return (
 		<>
-			<label htmlFor={props.name}>{props.children}</label>
-			<input type="text" name={props.name} defaultValue={props.value} />
+			<label htmlFor={name}>{children}</label>
+			<input type="text" id={name} defaultValue={value} />
 		</>
 	);
 }
