@@ -5,10 +5,9 @@ function FormDataListInput({
 	value,
 	defaultValue,
 	onChange,
-	realValues,
 }) {
 	const validator = (e) => {
-		if (!options.includes(e.target.value)) {
+		if (![...options, defaultValue, ""].includes(e.target.value)) {
 			e.target.style.backgroundColor = "pink";
 		} else e.target.style.backgroundColor = "";
 	};
@@ -30,12 +29,9 @@ function FormDataListInput({
 				onChange={onChange || null}
 			/>
 			<datalist id={`${name}List`}>
+				{defaultValue ? <option value={defaultValue} /> : null}
 				{options.map((option, i) => (
-					<option
-						key={`${name}-${option}`}
-						value={option}
-						data-value={realValues ? realValues[i] : option}
-					/>
+					<option key={`${name}-${option}`} value={option} />
 				))}
 			</datalist>
 		</>

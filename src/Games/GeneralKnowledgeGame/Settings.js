@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
+import useGameSettings from "./useGameSettings";
 import Button from "./../../Components/Button";
 import FormTextInput from "./../../Components/FormTextInput";
-import FormDataListInput from "./../../Components/FormDataListInput";
+import FormSelectInput from "./../../Components/FormSelectInput";
 
 //https://reactjs.org/docs/forms.html
 
 function Settings({ settings, dispatch }) {
-	const [formState, setFormState] = useState({
-		numberOfQuestions: settings.numberOfQuestions,
-		difficulty: settings.difficulty,
-		category: settings.category,
-	});
+	const [formState, setFormState, saveSettings] = useGameSettings(
+		settings,
+		dispatch
+	);
 
 	const [categoryOptions, setCategoryOptions] = useState([
 		"awaiting response from server",
@@ -28,11 +28,7 @@ function Settings({ settings, dispatch }) {
 	const difficultyOptions = ["hard", "medium", "easy"];
 
 	const changeHandler = (e) => {
-		console.log(e);
-		const assigner = {};
-		assigner[e.target.name] = e.target["data-value"];
-		const newState = Object.assign({ ...formState }, assigner);
-		setFormState(() => newState);
+		setFormState(e.target.id, e.target.value);
 	};
 
 	return (
@@ -43,29 +39,24 @@ function Settings({ settings, dispatch }) {
 			>
 				Number of Questions
 			</FormTextInput>
-			<FormDataListInput
+			<FormSelectInput
 				name="difficulty"
 				value={formState.difficulty}
 				options={difficultyOptions}
+				defaultValue="Any"
 			>
 				Difficulty
-			</FormDataListInput>
-			<FormDataListInput
+			</FormSelectInput>
+			<FormSelectInput
 				name="category"
 				value={formState.category}
 				options={categoryOptions.map((option) => option.name)}
-				realValues={categoryOptions.map((option) => option.id)}
+				optionValues={categoryOptions.map((option) => option.id)}
+				defaultValue="Any"
 			>
 				Category
-			</FormDataListInput>
-			<Button
-				onClick={() => {
-					dispatch({
-						type: "gameInfo/generalKnowledgeGame/updateSettings",
-						payload: formState,
-					});
-				}}
-			>
+			</FormSelectInput>
+			<Button onClick={() => saveSettings(dispatch, formState)}>
 				Save Settings
 			</Button>
 		</div>
