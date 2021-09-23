@@ -9,12 +9,7 @@ import FormSelectInput from "./../../Components/FormSelectInput";
 
 //https://reactjs.org/docs/forms.html
 
-function Settings({ settings, dispatch }) {
-	const [formState, setFormState, saveSettings] = useGameSettings(
-		settings,
-		dispatch
-	);
-
+function useCategoryOptions() {
 	const [categoryOptions, setCategoryOptions] = useState([
 		"awaiting response from server",
 	]);
@@ -28,6 +23,16 @@ function Settings({ settings, dispatch }) {
 		req();
 	}, []);
 
+	return categoryOptions;
+}
+
+function Settings({ settings, dispatch }) {
+	const [formState, setFormState, saveSettings] = useGameSettings(
+		settings,
+		dispatch
+	);
+
+	const categoryOptions = useCategoryOptions();
 	const difficultyOptions = ["hard", "medium", "easy"];
 
 	const changeHandler = (e) => {
