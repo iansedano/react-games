@@ -7,7 +7,8 @@ import Button from "./../../Components/Button";
 import FormTextInput from "./../../Components/FormTextInput";
 import FormSelectInput from "./../../Components/FormSelectInput";
 
-//https://reactjs.org/docs/forms.html
+// https://reactjs.org/docs/forms.html
+// https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 
 function useCategoryOptions() {
 	const [categoryOptions, setCategoryOptions] = useState([
