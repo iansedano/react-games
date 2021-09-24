@@ -9,6 +9,7 @@ import FormSelectInput from "./../../Components/FormSelectInput";
 
 // https://reactjs.org/docs/forms.html
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
+// https://reactjs.org/docs/refs-and-the-dom.html
 
 function useCategoryOptions() {
 	const [categoryOptions, setCategoryOptions] = useState([
