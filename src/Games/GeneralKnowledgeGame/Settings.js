@@ -10,15 +10,10 @@ import FormTextInput from "./../../Components/FormTextInput";
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({ settings, dispatch }) {
-	const [formState, setFormState, saveSettings] = useGameSettings(
-		settings,
-		dispatch
-	);
-
+function Settings({ formState, setFormState, saveSettings }) {
 	const submitHandler = (e) => {
 		e.preventDefault();
-		saveSettings(dispatch, formState);
+		saveSettings();
 	};
 
 	const changeHandler = (e) => {
