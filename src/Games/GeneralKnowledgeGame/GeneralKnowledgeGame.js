@@ -15,27 +15,38 @@ function GeneralKnowledgeGame() {
 	const GKState = state.games.generalKnowledge;
 	return (
 		<div className="flex-center">
-			{isPlaying ? (
-				<>
-					<Game
-						difficulty={GKState.settings.difficulty}
-						category={GKState.settings.category}
-						numberOfQuestions={GKState.settings.numberOfQuestions}
-						setIsPlaying={setIsPlaying}
-					/>
-					<Button onClick={() => setIsPlaying((p) => !p)}>
-						Quit Game
-					</Button>
-				</>
-			) : (
-				<>
-					<Settings settings={GKState.settings} dispatch={dispatch} />
-					<Stats answers={GKState.answers} />
-					<Button onClick={() => setIsPlaying((p) => !p)}>
-						Start Game
-					</Button>
-				</>
-			)}
+			{(() => {
+				if (isPlaying) {
+					return (
+						<>
+							<Game
+								difficulty={GKState.settings.difficulty}
+								category={GKState.settings.category}
+								numberOfQuestions={
+									GKState.settings.numberOfQuestions
+								}
+								setIsPlaying={setIsPlaying}
+							/>
+							<Button onClick={() => setIsPlaying((p) => !p)}>
+								Quit Game
+							</Button>
+						</>
+					);
+				} else {
+					return (
+						<>
+							<Settings
+								settings={GKState.settings}
+								dispatch={dispatch}
+							/>
+							<Stats answers={GKState.answers} />
+							<Button onClick={() => setIsPlaying((p) => !p)}>
+								Start Game
+							</Button>
+						</>
+					);
+				}
+			})()}
 		</div>
 	);
 }
