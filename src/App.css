@@ -113,3 +113,7 @@ select {
 .form-input-container .form-input {
 	width: 60%;
 }
+
+.question button {
+	background-color: var(--bg-col-3);
+}
