@@ -3,32 +3,20 @@ function FormSelectInput({
 	optionNames,
 	optionValues,
 	value,
-	defaultValue,
 	children,
 	onChange,
 }) {
-	console.log(
-		(() => {
-			if (value != null) return value;
-			if (defaultValue != null) return defaultValue;
-			return null;
-		})()
-	);
 	return (
-		<>
-			<label htmlFor={name}>{children}</label>
+		<div className="form-input-container flex-center">
+			<label htmlFor={name} className="form-input-label">
+				{children}
+			</label>
 			<select
 				id={name}
-				defaultValue={(() => {
-					if (value != null) return value;
-					if (defaultValue != null) return defaultValue;
-					return null;
-				})()}
-				onChange={onChange || null}
+				value={value != null ? value : null}
+				onChange={onChange}
+				className="form-input"
 			>
-				{defaultValue ? (
-					<option value={defaultValue}>{defaultValue}</option>
-				) : null}
 				{optionNames.map((optionName, i) => (
 					<option
 						key={`${name}-${optionName}`}
@@ -37,7 +25,7 @@ function FormSelectInput({
 					/>
 				))}
 			</select>
-		</>
+		</div>
 	);
 }
 

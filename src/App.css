@@ -101,3 +101,15 @@ select {
 	border-radius: 6px;
 	text-align: center;
 }
+
+.form-input-container {
+	width: 100%;
+	justify-content: left;
+}
+
+.form-input-container .form-input-label {
+	width: 40%;
+}
+.form-input-container .form-input {
+	width: 60%;
+}

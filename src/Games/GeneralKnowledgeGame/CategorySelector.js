@@ -1,26 +1,20 @@
-// import FormSelectInput from "./../../Components/FormSelectInput";
+import FormSelectInput from "./../../Components/FormSelectInput";
 
-function CategorySelector({ selectedCategory, categoryOptions }) {
-	const sortedCategoryOptions = [...categoryOptions].sort((a, b) =>
-		a.name < b.name ? -1 : 1
-	);
+import useCategoryOptions from "./useCategoryOptions";
 
-	console.log(selectedCategory, sortedCategoryOptions);
+function CategorySelector({ selectedCategory, onChange }) {
+	const categoryOptions = useCategoryOptions();
 
 	return (
-		<label>
+		<FormSelectInput
+			name="category"
+			value={selectedCategory}
+			optionNames={categoryOptions.map((option) => option.name)}
+			optionValues={categoryOptions.map((option) => option.value)}
+			onChange={onChange}
+		>
 			Category
-			<select value={parseInt(selectedCategory)}>
-				<option value="">Any</option>
-				{sortedCategoryOptions.map((option) => {
-					return (
-						<option value={option.id} key={String(option.id)}>
-							{option.name}
-						</option>
-					);
-				})}
-			</select>
-		</label>
+		</FormSelectInput>
 	);
 }
 
