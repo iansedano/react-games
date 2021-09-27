@@ -23,7 +23,16 @@ function useGameSettings(settings, dispatch) {
 		setFormState(newState);
 	};
 
-	return [formState, setState, () => saveState(dispatch, formState)];
+	const saveSettings = () => {
+		if (formState.numberOfQuestions > 50) {
+			alert("too many questions");
+			return 0;
+		}
+		saveState(dispatch, formState);
+		return 0;
+	};
+
+	return [formState, setState, saveSettings];
 }
 
 export default useGameSettings;

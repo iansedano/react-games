@@ -24,6 +24,7 @@ function GeneralKnowledgeGame() {
 	return (
 		<div className="flex-center">
 			{(() => {
+				/* IIFE */
 				if (isPlaying) {
 					return (
 						<>
@@ -47,16 +48,9 @@ function GeneralKnowledgeGame() {
 								formState={formState}
 								setFormState={setFormState}
 								saveSettings={saveSettings}
+								setIsPlaying={setIsPlaying}
 							/>
 							<Stats answers={GKState.answers} />
-							<Button
-								onClick={() => {
-									saveSettings();
-									setIsPlaying((p) => !p);
-								}}
-							>
-								Start Game
-							</Button>
 						</>
 					);
 				}

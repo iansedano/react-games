@@ -10,10 +10,11 @@ import FormTextInput from "./../../Components/FormTextInput";
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({ formState, setFormState, saveSettings }) {
+function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		saveSettings();
+		setIsPlaying((p) => !p);
 	};
 
 	const changeHandler = (e) => {
@@ -37,7 +38,7 @@ function Settings({ formState, setFormState, saveSettings }) {
 				selectedCategory={formState.category}
 				onChange={changeHandler}
 			/>
-			<Button onClick={submitHandler}>Save Settings</Button>
+			<Button type="submit">Start Game</Button>
 		</form>
 	);
 }

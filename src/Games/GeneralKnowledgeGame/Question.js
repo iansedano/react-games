@@ -1,3 +1,5 @@
+import Button from "./../../Components/Button";
+
 // {
 // 	category: "Entertainment: Film",
 // 	type: "multiple",
@@ -20,7 +22,7 @@ function MultipleChoiceQuestion({ question }) {
 		<>
 			<h3>{question.question}</h3>
 			{answerList.map((a) => {
-				return <button key={a}>{a}</button>;
+				return <Button key={a}>{a}</Button>;
 			})}
 		</>
 	);
@@ -30,8 +32,8 @@ function BooleanQuestion({ question }) {
 	return (
 		<>
 			<h3>{question.question}</h3>
-			<button>true</button>
-			<button>false</button>
+			<Button>true</Button>
+			<Button>false</Button>
 		</>
 	);
 }
