@@ -20,10 +20,12 @@ function MultipleChoiceQuestion({ question }) {
 
 	return (
 		<>
-			<h3>{question.question}</h3>
-			{answerList.map((a) => {
-				return <Button key={a}>{a}</Button>;
-			})}
+			<h3 className="bg-1 border-rad padding-s">{question.question}</h3>
+			<div className="flex-row">
+				{answerList.map((a) => {
+					return <Button key={a}>{a}</Button>;
+				})}
+			</div>
 		</>
 	);
 }
@@ -31,9 +33,11 @@ function MultipleChoiceQuestion({ question }) {
 function BooleanQuestion({ question }) {
 	return (
 		<>
-			<h3>{question.question}</h3>
-			<Button>true</Button>
-			<Button>false</Button>
+			<h3 className="bg-1 border-rad padding-s">{question.question}</h3>
+			<div className="flex-row">
+				<Button>true</Button>
+				<Button>false</Button>
+			</div>
 		</>
 	);
 }
@@ -44,7 +48,7 @@ function Question({ question, answerQuestion }) {
 	}
 
 	return (
-		<div className="question" onClick={handleClick}>
+		<div className="question margin-m flex-col" onClick={handleClick}>
 			{!question ? (
 				<h3>End of Quiz!</h3>
 			) : question.type === "multiple" ? (

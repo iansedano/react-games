@@ -22,7 +22,7 @@ function GeneralKnowledgeGame() {
 	);
 
 	return (
-		<div className="flex-center">
+		<div className="bg-3 flex-col border-rad justify-center main-game-container">
 			{(() => {
 				/* IIFE */
 				if (isPlaying) {

@@ -1,3 +1,28 @@
-.stat-form {
-	flex-direction: column;
+.settings-form {
+	width: 80%;
+}
+
+.main-game-container {
+	width: 100%;
+	height: 90%;
+	margin: 50px 0 50px 0;
+}
+
+.form-input-container {
+	width: 100%;
+	justify-content: left;
+}
+
+.form-input-container .form-input-label {
+	width: 40%;
+}
+.form-input-container .form-input {
+	width: 60%;
+}
+
+.question {
+}
+
+.question button {
+	background-color: var(--bg-col-3);
 }

@@ -33,7 +33,7 @@ body.dark-mode {
 	--bg-col-2: #597e99;
 	--bg-col-3: #879e56;
 
-	--text-col: #d6d6d6;
+	--text-col: #e4e4e4;
 	--anchor-col: #e5b567;
 
 	background-color: var(--bg-col-1);
@@ -100,20 +100,4 @@ input,
 select {
 	border-radius: 6px;
 	text-align: center;
-}
-
-.form-input-container {
-	width: 100%;
-	justify-content: left;
-}
-
-.form-input-container .form-input-label {
-	width: 40%;
-}
-.form-input-container .form-input {
-	width: 60%;
-}
-
-.question button {
-	background-color: var(--bg-col-3);
 }

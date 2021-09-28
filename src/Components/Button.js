@@ -5,7 +5,11 @@ function Button(props) {
 
 	if (!props.src) {
 		jsx = (
-			<button {...props} className={styles.btn} onClick={props.onClick}>
+			<button
+				{...props}
+				className={`${styles.btn} ${props.className}`}
+				onClick={props.onClick}
+			>
 				<h3>{props.children}</h3>
 			</button>
 		);
@@ -13,7 +17,7 @@ function Button(props) {
 		jsx = (
 			<button
 				{...props}
-				className={`${styles.tooltip} ${styles.btn}`}
+				className={`${styles.tooltip} ${styles.btn} ${props.className}`}
 				onClick={props.onClick}
 			>
 				<img

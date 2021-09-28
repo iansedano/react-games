@@ -22,7 +22,10 @@ function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
 	};
 
 	return (
-		<form className="stat-form flex-center" onSubmit={submitHandler}>
+		<form
+			className="settings-form margin-m flex-col"
+			onSubmit={submitHandler}
+		>
 			<FormTextInput
 				name="numberOfQuestions"
 				value={formState.numberOfQuestions}
@@ -38,7 +41,9 @@ function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
 				selectedCategory={formState.category}
 				onChange={changeHandler}
 			/>
-			<Button type="submit">Start Game</Button>
+			<Button type="submit" className="margin-m">
+				Start Game
+			</Button>
 		</form>
 	);
 }
