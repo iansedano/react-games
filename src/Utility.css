@@ -21,6 +21,10 @@
 	justify-content: center;
 }
 
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
 .full-width {
 	width: 100%;
 }
@@ -38,7 +42,7 @@
 }
 
 .border-rad {
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 }
 
 .margin-s {
@@ -54,5 +58,13 @@
 }
 
 .padding-m {
+	padding: 20px 20px 20px 20px;
+}
+
+.border-s {
+	padding: 10px 10px 10px 10px;
+}
+
+.border-m {
 	padding: 20px 20px 20px 20px;
 }

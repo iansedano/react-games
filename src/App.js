@@ -78,7 +78,7 @@ function App() {
 
 	return (
 		<globalState.Provider value={{ state, dispatch }}>
-			<main className="flex-center">
+			<main className="flex-col full-width">
 				<HeaderBar />
 				{page}
 				{state.siteSettings.page !== "home" ? (

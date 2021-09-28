@@ -7,7 +7,7 @@ import { globalState } from "./App";
 function UserProfile() {
 	const { state } = useContext(globalState);
 	return (
-		<div className="flex-center user-profile">
+		<div className="flex-row border-rad justify-evenly user-profile">
 			<img
 				alt="user gravatar"
 				className="user-avatar"

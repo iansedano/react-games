@@ -2,7 +2,7 @@ import PageNavButton from "./Components/PageNavButton";
 
 function GameSelector() {
 	return (
-		<div className="flex-center game-selector">
+		<div className="bg-3 flex-col border-rad border-s">
 			<h3>Play:</h3>
 			<div>
 				<PageNavButton

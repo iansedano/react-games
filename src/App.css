@@ -10,6 +10,8 @@ html {
 	--cn-sand: #f9cc3d;
 	--cn-yellow: #f4e660;
 	--cn-red: #ed1c24;
+
+	--border-radius: 6px;
 }
 
 body {
@@ -41,9 +43,6 @@ body.dark-mode {
 }
 
 main {
-	width: 100%;
-	flex-direction: column;
-	justify-content: space-between;
 	height: 80vh;
 }
 
@@ -54,22 +53,7 @@ main {
 	margin: 50px 50px 50px 50px;
 }
 
-.header-bar {
-	background-color: var(--bg-col-2);
-	justify-content: space-between;
-	border-radius: 6px;
-}
-
-.game-selector {
-	background-color: var(--bg-col-3);
-	flex-direction: column;
-	border-radius: 6px;
-	margin: 10px 0 10px 0;
-}
-
 .user-profile {
-	justify-content: space-evenly;
-	border-radius: 6px;
 	margin: 0 0 50px 0;
 }
 
@@ -98,6 +82,6 @@ select {
 
 input,
 select {
-	border-radius: 6px;
+	border-radius: var(--border-radius);
 	text-align: center;
 }
