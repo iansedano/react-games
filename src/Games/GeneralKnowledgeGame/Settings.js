@@ -1,5 +1,3 @@
-import useGameSettings from "./useGameSettings";
-
 import CategorySelector from "./CategorySelector";
 import DifficultySelector from "./DifficultySelector";
 
@@ -13,8 +11,7 @@ import FormTextInput from "./../../Components/FormTextInput";
 function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
 	const submitHandler = (e) => {
 		e.preventDefault();
-		saveSettings();
-		setIsPlaying((p) => !p);
+		if (saveSettings()) setIsPlaying((p) => !p);
 	};
 
 	const changeHandler = (e) => {
