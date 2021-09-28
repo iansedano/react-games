@@ -39,6 +39,18 @@ function updateGeneralKnowledgeGame(state, action) {
 					},
 				},
 			};
+		case "incrementTimesPlayed":
+			return {
+				...state,
+				games: {
+					...state.games,
+					generalKnowledge: {
+						...state.games.generalKnowledge,
+						timesPlayed:
+							state.games.generalKnowledge.timesPlayed + 1,
+					},
+				},
+			};
 		default:
 			return new Error("invalid general knowledge game action");
 	}

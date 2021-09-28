@@ -19,6 +19,9 @@ function useQuiz(difficulty, category, numberOfQuestions) {
 				type: "gameInfo/generalKnowledgeGame/addAnswers",
 				payload: answers,
 			});
+			dispatch({
+				type: "gameInfo/generalKnowledgeGame/incrementTimesPlayed",
+			});
 		}
 	}, [answers, dispatch, questions, questionIndex]);
 
