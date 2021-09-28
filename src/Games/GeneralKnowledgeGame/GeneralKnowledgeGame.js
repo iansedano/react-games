@@ -50,7 +50,10 @@ function GeneralKnowledgeGame() {
 								saveSettings={saveSettings}
 								setIsPlaying={setIsPlaying}
 							/>
-							<Stats answers={GKState.answers} />
+							<Stats
+								answers={GKState.answers}
+								dispatch={dispatch}
+							/>
 						</>
 					);
 				}

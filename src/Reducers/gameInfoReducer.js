@@ -28,6 +28,17 @@ function updateGeneralKnowledgeGame(state, action) {
 					},
 				},
 			};
+		case "resetAnswers":
+			return {
+				...state,
+				games: {
+					...state.games,
+					generalKnowledge: {
+						...state.games.generalKnowledge,
+						answers: [],
+					},
+				},
+			};
 		default:
 			return new Error("invalid general knowledge game action");
 	}
