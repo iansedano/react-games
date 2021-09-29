@@ -1,3 +1,5 @@
+import BounceLoader from "react-spinners/BounceLoader";
+
 import Question from "./Question";
 import useQuiz from "./useQuiz";
 
@@ -17,7 +19,20 @@ function Game({
 	);
 
 	return (
-		<Question question={currentQuestion} answerQuestion={answerQuestion} />
+		<>
+			{(() => {
+				if (!currentQuestion) {
+					return <BounceLoader />;
+				} else if (currentQuestion) {
+					return (
+						<Question
+							question={currentQuestion}
+							answerQuestion={answerQuestion}
+						/>
+					);
+				}
+			})()}
+		</>
 	);
 }
 export default Game;

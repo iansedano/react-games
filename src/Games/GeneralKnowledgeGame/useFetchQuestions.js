@@ -20,7 +20,7 @@ function useFetchQuestions(
 	numberOfQuestions,
 	sessionToken
 ) {
-	const [questions, setQuestions] = useState(["making request"]);
+	const [questions, setQuestions] = useState();
 	useEffect(() => {
 		const url = (() => {
 			const root = "https://opentdb.com/api.php?";
@@ -32,7 +32,8 @@ function useFetchQuestions(
 			];
 			return root + params.filter((p) => p !== "").join("&");
 		})();
-		async function req() {
+
+		(async () => {
 			try {
 				const resp = await fetch(url);
 				const json = await resp.json();
@@ -50,8 +51,7 @@ function useFetchQuestions(
 			} catch (e) {
 				console.error("something went wrong with fetch");
 			}
-		}
-		req();
+		})();
 	}, [difficulty, category, numberOfQuestions, sessionToken]);
 
 	return questions;

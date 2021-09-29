@@ -21,14 +21,16 @@ function useQuiz(
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {
-		if (!questions[questionIndex]) {
-			dispatch({
-				type: "gameInfo/generalKnowledgeGame/addAnswers",
-				payload: answers,
-			});
-			dispatch({
-				type: "gameInfo/generalKnowledgeGame/incrementTimesPlayed",
-			});
+		if (questions) {
+			if (!questions[questionIndex]) {
+				dispatch({
+					type: "gameInfo/generalKnowledgeGame/addAnswers",
+					payload: answers,
+				});
+				dispatch({
+					type: "gameInfo/generalKnowledgeGame/incrementTimesPlayed",
+				});
+			}
 		}
 	}, [answers, dispatch, questions, questionIndex]);
 
@@ -42,7 +44,7 @@ function useQuiz(
 		setQuestionIndex((c) => c + 1);
 	};
 
-	return [questions[questionIndex], answerQuestion];
+	return [questions ? questions[questionIndex] : null, answerQuestion];
 }
 
 export default useQuiz;
