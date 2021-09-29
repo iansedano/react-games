@@ -8,7 +8,13 @@ import FormTextInput from "./../../Components/FormTextInput";
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
+function Settings({
+	formState,
+	setFormState,
+	saveSettings,
+	setIsPlaying,
+	cachedQuestionCategories,
+}) {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		if (saveSettings()) setIsPlaying((p) => !p);
@@ -36,6 +42,7 @@ function Settings({ formState, setFormState, saveSettings, setIsPlaying }) {
 			/>
 			<CategorySelector
 				selectedCategory={formState.category}
+				cachedQuestionCategories={cachedQuestionCategories}
 				onChange={changeHandler}
 			/>
 			<Button type="submit" className="margin-m">

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 
 import Settings from "./Settings";
 import Stats from "./Stats";
@@ -15,6 +15,7 @@ function GeneralKnowledgeGame() {
 	const { state, dispatch } = useContext(globalState);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const GKState = state.games.generalKnowledge;
+	const cachedQuestionCategories = useRef();
 
 	const [formState, setFormState, saveSettings] = useGameSettings(
 		GKState.settings,
@@ -49,6 +50,9 @@ function GeneralKnowledgeGame() {
 								setFormState={setFormState}
 								saveSettings={saveSettings}
 								setIsPlaying={setIsPlaying}
+								cachedQuestionCategories={
+									cachedQuestionCategories
+								}
 							/>
 							<Stats
 								answers={GKState.answers}

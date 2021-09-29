@@ -2,8 +2,12 @@ import FormSelectInput from "./../../Components/FormSelectInput";
 
 import useCategoryOptions from "./useCategoryOptions";
 
-function CategorySelector({ selectedCategory, onChange }) {
-	const categoryOptions = useCategoryOptions();
+function CategorySelector({
+	selectedCategory,
+	onChange,
+	cachedQuestionCategories,
+}) {
+	const categoryOptions = useCategoryOptions(cachedQuestionCategories);
 
 	return (
 		<FormSelectInput
