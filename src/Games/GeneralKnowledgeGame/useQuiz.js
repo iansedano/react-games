@@ -3,12 +3,19 @@ import { globalState } from "./../../App";
 
 import useFetchQuestions from "./useFetchQuestions";
 
-function useQuiz(difficulty, category, numberOfQuestions) {
+function useQuiz(
+	difficulty,
+	category,
+	numberOfQuestions,
+	setIsPlaying,
+	sessionToken
+) {
 	const { dispatch } = useContext(globalState);
 	const questions = useFetchQuestions(
 		difficulty,
 		category,
-		numberOfQuestions
+		numberOfQuestions,
+		sessionToken
 	);
 	const [questionIndex, setQuestionIndex] = useState(0);
 	const [answers, setAnswers] = useState([]);

@@ -14,25 +14,27 @@ import he from "he";
 // 	]
 // }
 
-function useFetchQuestions(difficulty, category, numberOfQuestions) {
+function useFetchQuestions(
+	difficulty,
+	category,
+	numberOfQuestions,
+	sessionToken
+) {
 	const [questions, setQuestions] = useState(["making request"]);
-
 	useEffect(() => {
-		function urlBuilder(difficulty, category, numberOfQuestions) {
+		const url = (() => {
 			const root = "https://opentdb.com/api.php?";
 			const params = [
 				difficulty ? `difficulty=${difficulty}` : "",
 				category ? `category=${category}` : "",
 				numberOfQuestions ? `amount=${numberOfQuestions}` : "",
+				sessionToken ? `token=${sessionToken}` : "",
 			];
-			return root + params.filter((e) => e !== "").join("&");
-		}
-
+			return root + params.filter((p) => p !== "").join("&");
+		})();
 		async function req() {
 			try {
-				const resp = await fetch(
-					urlBuilder(difficulty, category, numberOfQuestions)
-				);
+				const resp = await fetch(url);
 				const json = await resp.json();
 				const questions = json.results.map((q) => {
 					return {
@@ -50,7 +52,7 @@ function useFetchQuestions(difficulty, category, numberOfQuestions) {
 			}
 		}
 		req();
-	}, [difficulty, category, numberOfQuestions]);
+	}, [difficulty, category, numberOfQuestions, sessionToken]);
 
 	return questions;
 }

@@ -6,9 +6,7 @@ function useCategoryOptions(cachedQuestionCategories) {
 	]);
 
 	useEffect(() => {
-		console.log(cachedQuestionCategories);
 		if (!cachedQuestionCategories.current) {
-			console.log("request");
 			const req = async () => {
 				const resp = await fetch(
 					"https://opentdb.com/api_category.php"

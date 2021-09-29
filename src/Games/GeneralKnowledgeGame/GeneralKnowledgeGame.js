@@ -6,6 +6,7 @@ import Game from "./Game";
 import Button from "./../../Components/Button";
 
 import useGameSettings from "./useGameSettings";
+import useToken from "./useToken";
 
 import { globalState } from "./../../App";
 
@@ -16,6 +17,7 @@ function GeneralKnowledgeGame() {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const GKState = state.games.generalKnowledge;
 	const cachedQuestionCategories = useRef();
+	const sessionToken = useToken();
 
 	const [formState, setFormState, saveSettings] = useGameSettings(
 		GKState.settings,
@@ -36,6 +38,7 @@ function GeneralKnowledgeGame() {
 									GKState.settings.numberOfQuestions
 								}
 								setIsPlaying={setIsPlaying}
+								sessionToken={sessionToken}
 							/>
 							<Button onClick={() => setIsPlaying((p) => !p)}>
 								Quit Game
