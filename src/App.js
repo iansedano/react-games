@@ -31,9 +31,8 @@ const defaultState = {
 			timesPlayed: 0,
 			settings: {
 				numberOfQuestions: 10,
-				difficulty: null,
-				sessionToken: null,
-				category: null,
+				difficulty: "",
+				category: "",
 			},
 			answers: [],
 		},
