@@ -11,7 +11,7 @@ function useQuiz(
 	sessionToken
 ) {
 	const { dispatch } = useContext(globalState);
-	const questions = useFetchQuestions(
+	const [questions, error] = useFetchQuestions(
 		difficulty,
 		category,
 		numberOfQuestions,
@@ -44,7 +44,7 @@ function useQuiz(
 		setQuestionIndex((c) => c + 1);
 	};
 
-	return [questions ? questions[questionIndex] : null, answerQuestion];
+	return [questions ? questions[questionIndex] : null, answerQuestion, error];
 }
 
 export default useQuiz;
