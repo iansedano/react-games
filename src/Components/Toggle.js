@@ -1,6 +1,6 @@
 import styles from "./Toggle.module.css";
 
-// https://www.w3schools.com/howto/howto_css_switch.asp
+// adapted from https://www.w3schools.com/howto/howto_css_switch.asp
 function Toggle({ ...props }) {
 	return (
 		<div>
