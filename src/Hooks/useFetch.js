@@ -4,27 +4,28 @@ function useFetch(url) {
 	const [response, setResponse] = useState(null);
 	const [error, setError] = useState(null);
 	// What is a real use case for isLoading? It seems redundant to me.
-	const [isLoading, setIsLoading] = useState(false)
-	
+	const [isLoading, setIsLoading] = useState(false);
+
 	useEffect(() => {
 		(async () => {
-			setIsLoading(true)
+			setIsLoading(true);
 			try {
 				const resp = await fetch(url);
 				if (resp.ok) {
-					setIsLoading(false)
+					setIsLoading(false);
 					// TODO - some way to accept different data types?
 					const json = await resp.json();
-					setResponse(json)
+					setResponse(json);
 				} else {
-					setIsLoading(false)
+					setIsLoading(false);
 					setError("Something went with the request.");
 				}
 			} catch (e) {
-				setIsLoading(false)
+				setIsLoading(false);
 				if (!window.navigator.onLine) {
 					setError("Error message: " + e.message + " (OFFLINE)");
 				} else {
+					// TODO - implement status code
 					setError("Error message: " + e.message);
 				}
 			}
@@ -34,7 +35,7 @@ function useFetch(url) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	return {"isLoading": isLoading, "error": error, "response": response}
+	return { isLoading: isLoading, error: error, response: response };
 }
 
 export default useFetch;
