@@ -32,7 +32,7 @@ function useFetch(url, options = {}) {
 				}
 			})();
 		}
-	}, [url]);
+	}, [url, options.abort]);
 
 	return { isLoading: isLoading, error: error, response: response };
 }
