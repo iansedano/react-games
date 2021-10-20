@@ -1,35 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useOpenTriviaApi from "./useOpenTriviaApi";
 
 function useCategoryOptions(cachedQuestionCategories) {
 	const [categoryOptions, setCategoryOptions] = useState([
 		"awaiting response from server",
 	]);
 
-	useEffect(() => {
-		if (!cachedQuestionCategories.current) {
-			const req = async () => {
-				const resp = await fetch(
-					"https://opentdb.com/api_category.php"
-				);
-				const json = await resp.json();
-				const sortedCategoryOptions = [...json.trivia_categories].sort(
-					(a, b) => (a.name < b.name ? -1 : 1)
-				);
+	const { isLoading, error, response } = useOpenTriviaApi(
+		"api_category.php",
+		{ abort: !cachedQuestionCategories.current }
+	);
+	console.log(1);
+	// if (!cachedQuestionCategories.current) {
 
-				sortedCategoryOptions.unshift({ id: "", name: "Any" });
+	// 	const sortedCategoryOptions = [...response.trivia_categories].sort(
+	// 		(a, b) => (a.name < b.name ? -1 : 1)
+	// 	);
 
-				const output = sortedCategoryOptions.map((option) => {
-					return { name: option.name, value: option.id };
-				});
+	// 	sortedCategoryOptions.unshift({ id: "", name: "Any" });
 
-				cachedQuestionCategories.current = output;
-				setCategoryOptions(output);
-			};
-			req();
-		} else {
-			setCategoryOptions(cachedQuestionCategories.current);
-		}
-	}, [cachedQuestionCategories]);
+	// 	const output = sortedCategoryOptions.map((option) => {
+	// 		return { name: option.name, value: option.id };
+	// 	});
+
+	// 	cachedQuestionCategories.current = output;
+	// 	setCategoryOptions(output);
+	// } else {
+	// 	setCategoryOptions(cachedQuestionCategories.current);
+	// }
 
 	return categoryOptions;
 }
