@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { globalState } from "./../../App";
 
+import { globalState } from "./../../App";
 import useFetchQuestions from "./useFetchQuestions";
 
 function useQuiz(
@@ -11,13 +11,16 @@ function useQuiz(
 	sessionToken
 ) {
 	const { dispatch } = useContext(globalState);
-	const [questions, error] = useFetchQuestions(
+	const { isLoading, error, questions } = useFetchQuestions(
 		difficulty,
 		category,
 		numberOfQuestions,
 		sessionToken
 	);
+	// questionIndex for the question the player is currenty answering,
+	// and a way to know if the quiz has ended.
 	const [questionIndex, setQuestionIndex] = useState(0);
+	// answers as a store of the questions answered, 1 for correct, 0 for wrong.
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {
@@ -34,17 +37,21 @@ function useQuiz(
 		}
 	}, [answers, dispatch, questions, questionIndex]);
 
-	const answerQuestion = (answerGiven) => {
+	const answerCallback = (answerGiven) => {
 		if (answerGiven === questions[questionIndex].correct_answer) {
 			setAnswers((arr) => [...arr, 1]);
 		} else {
 			setAnswers((arr) => [...arr, 0]);
 		}
-
 		setQuestionIndex((c) => c + 1);
 	};
 
-	return [questions ? questions[questionIndex] : null, answerQuestion, error];
+	return {
+		isLoading: isLoading,
+		currentQuestion: questions ? questions[questionIndex] : null,
+		answerCallback: answerCallback,
+		error: error,
+	};
 }
 
 export default useQuiz;

@@ -42,9 +42,9 @@ function BooleanQuestion({ question }) {
 	);
 }
 
-function Question({ question, answerQuestion }) {
+function Question({ question, answerCallback }) {
 	function handleClick(e) {
-		answerQuestion(e.target.innerText);
+		answerCallback(e.target.innerText);
 	}
 
 	return (
@@ -54,12 +54,12 @@ function Question({ question, answerQuestion }) {
 			) : question.type === "multiple" ? (
 				<MultipleChoiceQuestion
 					question={question}
-					answerQuestion={answerQuestion}
+					answerCallback={answerCallback}
 				/>
 			) : question.type === "boolean" ? (
 				<BooleanQuestion
 					question={question}
-					answerQuestion={answerQuestion}
+					answerCallback={answerCallback}
 				/>
 			) : (
 				question

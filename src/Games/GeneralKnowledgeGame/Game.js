@@ -10,7 +10,7 @@ function Game({
 	setIsPlaying,
 	sessionToken,
 }) {
-	const [currentQuestion, answerQuestion, error] = useQuiz(
+	const { isLoading, currentQuestion, answerCallback, error } = useQuiz(
 		difficulty,
 		category,
 		numberOfQuestions,
@@ -18,31 +18,21 @@ function Game({
 		sessionToken
 	);
 
-	return (
-		<>
-			{(() => {
-				if (error) {
-					console.log(error);
-					return (
-						<>
-							<h3>Request failed!</h3>
-							<p>{error}</p>
-						</>
-					);
-				} else if (currentQuestion === null) {
-					return <BounceLoader />;
-				} else if (currentQuestion) {
-					return (
-						<Question
-							question={currentQuestion}
-							answerQuestion={answerQuestion}
-						/>
-					);
-				} else if (currentQuestion === undefined) {
-					return <h3>End of Quiz!</h3>;
-				}
-			})()}
-		</>
-	);
+	if (isLoading) {
+		return <BounceLoader />;
+	} else if (!isLoading && error != null) {
+		return <h3>error</h3>;
+	} else if (currentQuestion) {
+		return (
+			<Question
+				question={currentQuestion}
+				answerCallback={answerCallback}
+			/>
+		);
+	} else if (currentQuestion === undefined) {
+		return <h3>End of Quiz!</h3>;
+	} else {
+		return null;
+	}
 }
 export default Game;
