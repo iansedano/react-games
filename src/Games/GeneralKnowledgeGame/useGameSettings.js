@@ -16,6 +16,9 @@ function useGameSettings(settings, dispatch) {
 		setFormState(newState);
 	};
 
+	// I would stay away from returning 1 and 0 since they don't communicate what's happening. 
+	// Booleans in a descriptive variables should be the way to go here? 
+	// for example: const didSaveSettings = false 
 	const saveSettings = () => {
 		if (formState.numberOfQuestions > 50) {
 			alert("Too many questions (max 50)");

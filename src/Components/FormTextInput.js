@@ -1,3 +1,7 @@
+
+// they way we are using children here might be a bit confusing.
+// We should have a more specific prop like: "labelText"
+// Otherwise, we might get random components as the children of the label
 function FormTextInput({ name, children, value, onChange }) {
 	return (
 		<div className="form-input-container flex-center">
