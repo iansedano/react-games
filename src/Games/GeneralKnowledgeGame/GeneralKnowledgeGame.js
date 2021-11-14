@@ -3,8 +3,8 @@ import { useState, useContext, useRef } from "react";
 import Button from "./../../Components/Button";
 import { globalState } from "./../../App";
 
-import useGameSettings from "./useGameSettings";
-import useToken from "./useToken";
+import useGameSettings from "./Hooks/useGameSettings";
+import useToken from "./Hooks/useToken";
 import Settings from "./Settings";
 import Stats from "./Stats";
 import Game from "./Game";

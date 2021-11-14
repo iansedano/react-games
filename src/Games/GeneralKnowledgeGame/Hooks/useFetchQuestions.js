@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import he from "he";
 
-import { STATUS } from "./../../Hooks/useFetch"
+import { STATUS } from "./../../../Hooks/useFetch"
 
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
@@ -63,7 +63,7 @@ function useFetchQuestions(
 				})
 			);
 		}
-	}, [status])
+	}, [status, response])
 
 	
 

@@ -43,7 +43,7 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 			}
 			setStatus(STATUS.resolved)
 		}
-	}, [url, options.abort]);
+	}, [url, options.abort, options.cacheValue, response, error]);
 
 	return { status, error, response };
 }
