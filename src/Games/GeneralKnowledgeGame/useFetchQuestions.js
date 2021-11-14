@@ -2,19 +2,27 @@ import { useState } from "react";
 import he from "he";
 
 import useOpenTriviaApi from "./useOpenTriviaApi";
+import { STATUS } from "./../../Hooks/useFetch"
 
-// {
-// 	category: "Entertainment: Film",
-// 	type: "multiple",
-// 	difficulty: "medium",
-// 	question: "What was Marilyn Monroe`s character&#039;s first name in the film &quot;Some Like It Hot&quot;?",
-// 	correct_answer: "Sugar",
-// 	incorrect_answers: [
-// 		"Honey",
-// 		"Caramel",
-// 		"Candy"
-// 	]
-// }
+/*
+
+Sample question structure returned from server, note HTML escaped chars
+Hence need for 'he'
+
+{
+	category: "Entertainment: Film",
+	type: "multiple",
+	difficulty: "medium",
+	question: "What was Marilyn Monroe`s character&#039;s first name in the film &quot;Some Like It Hot&quot;?",
+	correct_answer: "Sugar",
+	incorrect_answers: [
+		"Honey",
+		"Caramel",
+		"Candy"
+	]
+}
+
+*/
 
 function useFetchQuestions(
 	difficulty,
@@ -24,7 +32,8 @@ function useFetchQuestions(
 ) {
 	const [questions, setQuestions] = useState(null);
 
-	const { isLoading, error, response } = useOpenTriviaApi(
+	const { status, error, response } = useOpenTriviaApi(
+		// IIFE to build the url based on the hook parameters
 		(() => {
 			const root = "api.php?";
 			const params = [
@@ -37,12 +46,7 @@ function useFetchQuestions(
 		})()
 	);
 
-	if (
-		!isLoading &&
-		error === null &&
-		response != null &&
-		questions === null
-	) {
+	if (status === STATUS.resolved) {
 		setQuestions(
 			response.results.map((question) => {
 				return {
@@ -57,7 +61,7 @@ function useFetchQuestions(
 		);
 	}
 
-	return { isLoading, error, questions };
+	return { status, error, questions };
 }
 
 export default useFetchQuestions;

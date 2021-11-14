@@ -11,7 +11,7 @@ function useQuiz(
 	sessionToken
 ) {
 	const { dispatch } = useContext(globalState);
-	const { isLoading, error, questions } = useFetchQuestions(
+	const { status, error, questions } = useFetchQuestions(
 		difficulty,
 		category,
 		numberOfQuestions,
@@ -47,10 +47,10 @@ function useQuiz(
 	};
 
 	return {
-		isLoading: isLoading,
+		status,
 		currentQuestion: questions ? questions[questionIndex] : null,
-		answerCallback: answerCallback,
-		error: error,
+		answerCallback,
+		error,
 	};
 }
 

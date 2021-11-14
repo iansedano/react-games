@@ -1,4 +1,4 @@
-import useFetch from "../../Hooks/useFetch";
+import useFetch, { STATUS } from "../../Hooks/useFetch";
 
 const openTriviaResponseCodes = {
 	0: "Success",
@@ -10,18 +10,18 @@ const openTriviaResponseCodes = {
 
 function useOpenTriviaApi(endpoint, options) {
 	const url = "https://opentdb.com/" + endpoint;
-	const { isLoading, error, response } = useFetch(url, options);
-	if (response) {
-		if (response.response_code !== 0) {
+	const { status, error, response } = useFetch(url, options);
+	if (status === STATUS.resolved) {
+		if (response.response_code !== openTriviaResponseCodes[0]) {
 			return {
-				isLoading: isLoading,
+				status: status,
 				error: openTriviaResponseCodes[response.response_code],
 				response: response,
 			};
 		}
 	}
 
-	return { isLoading: isLoading, error: error, response: response };
+	return { status, error, response };
 }
 
 export default useOpenTriviaApi;

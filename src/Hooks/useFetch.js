@@ -1,40 +1,46 @@
 import { useState, useEffect } from "react";
 
-function useFetch(url, options = {}) {
+export const STATUS = {
+	"pending" : "pending",
+	"resolved" : "resolved",
+	"rejected" : "rejected"
+}
+
+const defaultOptions = {
+	"abort" : false
+}
+
+function useFetch(url, options = defaultOptions) {
+	console.log(url)
 	const [response, setResponse] = useState(null);
 	const [error, setError] = useState(null);
-	// What is a real use case for isLoading? It seems redundant to me.
-	const [isLoading, setIsLoading] = useState(false);
+	const [status, setStatus] = useState(STATUS.pending)
 
 	useEffect(() => {
 		if (options.abort !== true) {
+			console.log("Making request " + url)
 			(async () => {
-				setIsLoading(true);
 				try {
 					const response = await fetch(url);
 					if (response.ok) {
-						setIsLoading(false);
 						// TODO - some way to accept different data types?
-						const json = await response.json();
-						setResponse(json);
+						setResponse(await response.json());
+						setStatus(STATUS.resolved);
 					} else {
-						setIsLoading(false);
 						setError("Something went with the request.");
+						setStatus(STATUS.rejected);
 					}
 				} catch (e) {
-					setIsLoading(false);
-					if (!window.navigator.onLine) {
-						setError(`Error message: ${e.message} (OFFLINE)`);
-					} else {
-						// TODO - implement status code
-						setError(`Error message: ${e.message}`);
-					}
+					setError(`Error message: ${e.message}`);
+					setStatus(STATUS.rejected);
 				}
 			})();
+		} else {
+			setStatus(STATUS.resolved)
 		}
 	}, [url, options.abort]);
 
-	return { isLoading: isLoading, error: error, response: response };
+	return { status, error, response };
 }
 
 export default useFetch;

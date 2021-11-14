@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
+import { STATUS } from "./../../Hooks/useFetch"
+
 function prepareCategoryList(response) {
 	const sortedCategoryOptions = [...response.trivia_categories].sort((a, b) =>
 		a.name < b.name ? -1 : 1
@@ -21,12 +23,12 @@ function useCategoryOptions(cachedQuestionCategories) {
 		{ name: "awaiting response from server" },
 	]);
 
-	const { isLoading, error, response } = useOpenTriviaApi(
+	const { status, error, response } = useOpenTriviaApi(
 		"api_category.php",
 		{ abort: cachedQuestionCategories.current !== undefined }
 	);
 
-	if (response && cachedQuestionCategories.current === undefined) {
+	if (status === STATUS.resolved && cachedQuestionCategories.current === undefined) {
 		const output = prepareCategoryList(response);
 		cachedQuestionCategories.current = output;
 		setCategoryOptions(output);
@@ -37,11 +39,7 @@ function useCategoryOptions(cachedQuestionCategories) {
 		setCategoryOptions(cachedQuestionCategories.current);
 	}
 
-	return {
-		isLoading: isLoading,
-		error: error,
-		categoryOptions: categoryOptions,
-	};
+	return { status, error, categoryOptions };
 }
 
 export default useCategoryOptions;

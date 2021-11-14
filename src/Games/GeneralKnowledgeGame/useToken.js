@@ -1,5 +1,7 @@
 import { useRef } from "react";
 
+import { STATUS } from "./../../Hooks/useFetch"
+
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
 function useToken() {
@@ -7,12 +9,12 @@ function useToken() {
 
 	const haveToken = Boolean(tokenRef.current);
 
-	const { isLoading, error, response } = useOpenTriviaApi(
+	const { status, response } = useOpenTriviaApi(
 		"api_token.php?command=request",
 		{ abort: haveToken }
 	);
 
-	if (!haveToken && !isLoading && !error && response) {
+	if (!haveToken && status === STATUS.resolved) {
 		tokenRef.current = response.token;
 	}
 

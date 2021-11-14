@@ -1,21 +1,23 @@
 import BounceLoader from "react-spinners/BounceLoader";
 
+import { STATUS } from "./../../Hooks/useFetch"
+import FormSelectInput from "./../../Components/FormSelectInput";
+
 import useCategoryOptions from "./useCategoryOptions";
 
-import FormSelectInput from "./../../Components/FormSelectInput";
 
 function CategorySelector({
 	selectedCategory,
 	onChange,
 	cachedQuestionCategories,
 }) {
-	const { isLoading, error, categoryOptions } = useCategoryOptions(
+	const { status, error, categoryOptions } = useCategoryOptions(
 		cachedQuestionCategories
 	);
-
-	if (isLoading) {
+	
+	if (status === STATUS.pending) {
 		return <BounceLoader />;
-	} else if (!isLoading && categoryOptions != null) {
+	} else if (status === STATUS.resolved && categoryOptions != null) {
 		return (
 			<FormSelectInput
 				name="category"
@@ -28,7 +30,9 @@ function CategorySelector({
 			</FormSelectInput>
 		);
 	} else if (error != null) {
-		return <h3>error</h3>;
+		return <h3>{error}</h3>;
+	} else {
+		return null;
 	}
 }
 
