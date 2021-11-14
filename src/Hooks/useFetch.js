@@ -24,14 +24,17 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 					if (response.ok) {
 						// TODO - some way to accept different data types?
 						setResponse(await response.json());
-						setStatus(STATUS.resolved);
 					} else {
 						setError("Something went with the request.");
-						setStatus(STATUS.rejected);
 					}
 				} catch (e) {
 					setError(`Error message: ${e.message}`);
-					setStatus(STATUS.rejected);
+				} finally {
+					if (response) {
+						setStatus(STATUS.resolved);
+					} else if (error) {
+						setStatus(STATUS.rejected);
+					}
 				}
 			})();
 		} else if (options.abort === true) {
