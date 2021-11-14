@@ -6,19 +6,18 @@ export const STATUS = {
 	"rejected" : "rejected"
 }
 
-const defaultOptions = {
-	"abort" : false
+export const DEFAULT_FETCH_OPTIONS = {
+	"abort" : false,
+	"cacheValue": null
 }
 
-function useFetch(url, options = defaultOptions) {
-	console.log(url)
+function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 	const [response, setResponse] = useState(null);
 	const [error, setError] = useState(null);
 	const [status, setStatus] = useState(STATUS.pending)
 
 	useEffect(() => {
 		if (options.abort !== true) {
-			console.log("MAKING REQUEST  " + url);
 			(async () => {
 				try {
 					const response = await fetch(url);
@@ -35,7 +34,10 @@ function useFetch(url, options = defaultOptions) {
 					setStatus(STATUS.rejected);
 				}
 			})();
-		} else {
+		} else if (options.abort === true) {
+			if (options.cacheValue) {
+				setResponse(options.cacheValue)
+			}
 			setStatus(STATUS.resolved)
 		}
 	}, [url, options.abort]);
