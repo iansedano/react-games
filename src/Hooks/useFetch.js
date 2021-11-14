@@ -18,7 +18,7 @@ function useFetch(url, options = defaultOptions) {
 
 	useEffect(() => {
 		if (options.abort !== true) {
-			console.log("Making request " + url)
+			console.log("MAKING REQUEST  " + url);
 			(async () => {
 				try {
 					const response = await fetch(url);

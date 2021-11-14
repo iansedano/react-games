@@ -1,14 +1,13 @@
 import { useState, useContext, useRef } from "react";
 
-import Settings from "./Settings";
-import Stats from "./Stats";
-import Game from "./Game";
 import Button from "./../../Components/Button";
+import { globalState } from "./../../App";
 
 import useGameSettings from "./useGameSettings";
 import useToken from "./useToken";
-
-import { globalState } from "./../../App";
+import Settings from "./Settings";
+import Stats from "./Stats";
+import Game from "./Game";
 
 import "./GeneralKnowledgeGame.css";
 

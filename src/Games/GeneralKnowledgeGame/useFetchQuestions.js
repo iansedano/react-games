@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import he from "he";
 
-import useOpenTriviaApi from "./useOpenTriviaApi";
 import { STATUS } from "./../../Hooks/useFetch"
+
+import useOpenTriviaApi from "./useOpenTriviaApi";
+
 
 /*
 
@@ -45,21 +47,25 @@ function useFetchQuestions(
 			return root + params.filter((p) => p !== "").join("&");
 		})()
 	);
+	
+	useEffect(() => {
+		if (status === STATUS.resolved) {
+			setQuestions(
+				response.results.map((question) => {
+					return {
+						...question,
+						question: he.decode(question.question),
+						correct_answer: he.decode(question.correct_answer),
+						incorrect_answers: question.incorrect_answers.map(
+							(answer) => he.decode(answer)
+						),
+					};
+				})
+			);
+		}
+	}, [status])
 
-	if (status === STATUS.resolved) {
-		setQuestions(
-			response.results.map((question) => {
-				return {
-					...question,
-					question: he.decode(question.question),
-					correct_answer: he.decode(question.correct_answer),
-					incorrect_answers: question.incorrect_answers.map(
-						(answer) => he.decode(answer)
-					),
-				};
-			})
-		);
-	}
+	
 
 	return { status, error, questions };
 }
