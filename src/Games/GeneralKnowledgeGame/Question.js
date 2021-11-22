@@ -44,6 +44,7 @@ function BooleanQuestion({ question }) {
 
 function Question({ question, answerCallback }) {
 	function handleClick(e) {
+		// TODO reject event if not a button...
 		answerCallback(e.target.innerText);
 	}
 

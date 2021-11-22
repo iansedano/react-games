@@ -1,10 +1,9 @@
 import BounceLoader from "react-spinners/BounceLoader";
 
-import { STATUS } from "./../../Hooks/useFetch"
+import { STATUS } from "./../../Hooks/useFetch";
 
 import useQuiz from "./Hooks/useQuiz";
 import Question from "./Question";
-
 
 function Game({
 	difficulty,
@@ -21,11 +20,11 @@ function Game({
 		sessionToken
 	);
 
-	if (status === STATUS.pending ) {
+	if (status === STATUS.pending) {
 		return <BounceLoader />;
 	} else if (status === STATUS.rejected) {
 		return <h3>{error}</h3>;
-	} else if (currentQuestion) {
+	} else if (status === STATUS.resolved) {
 		return (
 			<Question
 				question={currentQuestion}
