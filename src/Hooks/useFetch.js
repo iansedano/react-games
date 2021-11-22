@@ -16,8 +16,6 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 	const [error, setError] = useState(null);
 	const [status, setStatus] = useState(STATUS.pending);
 
-	console.log(status);
-
 	useEffect(() => {
 		if (options.abort !== true) {
 			(async () => {
