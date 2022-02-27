@@ -3,12 +3,7 @@ import { useState, useEffect, useContext, useCallback } from "react";
 import { globalState } from "./../../../App";
 import useFetchQuestions from "./useFetchQuestions";
 
-function useQuiz(
-	difficulty,
-	category,
-	numberOfQuestions,
-	sessionToken
-) {
+function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 	const { dispatch } = useContext(globalState);
 	const { status, error, questions } = useFetchQuestions(
 		difficulty,
@@ -36,14 +31,17 @@ function useQuiz(
 		}
 	}, [answers, dispatch, questions, questionIndex]);
 
-	const answerCallback = useCallback((answerGiven) => {
-		if (answerGiven === questions[questionIndex].correct_answer) {
-			setAnswers((arr) => [...arr, 1]);
-		} else {
-			setAnswers((arr) => [...arr, 0]);
-		}
-		setQuestionIndex((c) => c + 1);
-	},[questionIndex]);
+	const answerCallback = useCallback(
+		(answerGiven) => {
+			if (answerGiven === questions[questionIndex].correct_answer) {
+				setAnswers((arr) => [...arr, 1]);
+			} else {
+				setAnswers((arr) => [...arr, 0]);
+			}
+			setQuestionIndex((c) => c + 1);
+		},
+		[questionIndex]
+	);
 
 	return {
 		status,

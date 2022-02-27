@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { globalState } from "./App";
 import Toggle from "./Components/Toggle";
 
+import ACTIONS from "./State/ACTIONS";
+
 function HeaderBar() {
 	const { state, dispatch } = useContext(globalState);
 	return (
@@ -12,9 +14,9 @@ function HeaderBar() {
 				<p>Toggle Dark Mode</p>
 				<Toggle
 					onChange={() => {
-						dispatch({ type: "siteSettings/toggleDarkMode" });
+						dispatch({ type: ACTIONS.TOGGLE_DARK_MODE });
 					}}
-					checked={state.siteSettings.darkMode}
+					checked={state.darkMode}
 				/>
 			</div>
 		</div>

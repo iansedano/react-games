@@ -23,9 +23,11 @@
 // 	},
 // };
 
+import PAGES from "./PAGES";
+
 const DEFAULT_STATE = {
 	darkMode: false,
-	page: "home",
+	page: PAGES.HOME,
 	userName: "Nomad",
 	lastLogin: new Date(),
 	quizTimesPlayed: 0,
@@ -33,6 +35,8 @@ const DEFAULT_STATE = {
 	quizDifficultySet: "",
 	quizCategorySet: "",
 	quizAnswers: [],
+	timesTableTimesPlayed: 0,
+	connectFourTimesPlayed: 0,
 };
 
 export default DEFAULT_STATE;

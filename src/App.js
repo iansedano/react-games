@@ -35,10 +35,10 @@ function App() {
 	}, [state]);
 
 	useEffect(() => {
-		if (state.siteSettings.darkMode) {
+		if (state.darkMode) {
 			document.body.classList.add("dark-mode");
 		} else document.body.classList.remove("dark-mode");
-	}, [state.siteSettings.darkMode]);
+	}, [state.darkMode]);
 
 	let page;
 

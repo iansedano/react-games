@@ -1,7 +1,6 @@
 // https://avatars.dicebear.com/docs/http-api
 // `https://avatars.dicebear.com/api/bottts/${name}.svg`
 import { useContext } from "react";
-
 import { globalState } from "./App";
 
 function UserProfile() {
@@ -11,18 +10,15 @@ function UserProfile() {
 			<img
 				alt="user gravatar"
 				className="user-avatar"
-				src={`https://avatars.dicebear.com/api/bottts/${state.user.name}.svg`}
+				src={`https://avatars.dicebear.com/api/bottts/${state.userName}.svg`}
 			></img>
-			<h2>Welcome, {state.user.name}!</h2>
+			<h2>Welcome, {state.userName}!</h2>
 			<div>
 				<h4>Times played</h4>
 				<ul>
-					<li>Times Table - {state.games.timesTable.timesPlayed}</li>
-					<li>
-						General Knowledge -{" "}
-						{state.games.generalKnowledge.timesPlayed}
-					</li>
-					<li>Connect 4 - {state.games.connectFour.timesPlayed}</li>
+					<li>Times Table - {state.timesTableTimesPlayed}</li>
+					<li>General Knowledge - {state.quizTimesPlayed}</li>
+					<li>Connect 4 - {state.connectFourTimesPlayed}</li>
 				</ul>
 			</div>
 		</div>

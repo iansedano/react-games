@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-function useGameSettings(settings, dispatch) {
+function useGameSettings() {
 	const [formState, setFormState] = useState({
-		numberOfQuestions: settings.numberOfQuestions,
-		difficulty: settings.difficulty,
-		category: settings.category,
+		numberOfQuestions: 10,
+		difficulty: "",
+		category: "",
 	});
 
 	const setState = (key, value) => {
@@ -25,11 +25,6 @@ function useGameSettings(settings, dispatch) {
 			alert("Must use at least 1 question");
 			return 0;
 		}
-
-		dispatch({
-			type: "gameInfo/generalKnowledgeGame/updateSettings",
-			payload: formState,
-		});
 		return 1;
 	};
 

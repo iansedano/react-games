@@ -3,15 +3,18 @@ import Button from "./Button";
 
 import { globalState } from "./../App";
 
-function PageNavButton({ src, page, children }) {
+import ACTIONS from "./../State/ACTIONS";
+import PAGES from "./../State/PAGES";
+
+function PageNavButton({ page, children }) {
 	const { dispatch } = useContext(globalState);
 
 	return (
 		<Button
-			src={src}
 			onClick={() => {
 				dispatch({
-					type: `siteSettings/changePage/${page}`,
+					type: ACTIONS.CHANGE_PAGE,
+					payload: PAGES[page],
 				});
 			}}
 		>

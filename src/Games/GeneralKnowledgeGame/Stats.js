@@ -1,7 +1,11 @@
-import Button from "./../../Components/Button";
+import { useContext } from "react";
 
-function Stats({ answers, dispatch }) {
-	if (answers.length) {
+import Button from "./../../Components/Button";
+import { globalState } from "./../../App";
+
+function Stats({ answers }) {
+	const { state, dispatch } = useContext(globalState);
+	if (state.quizAnswers.length) {
 		const countRight = answers.filter((a) => a === 1).length;
 		const percentRight = `${((countRight / answers.length) * 100).toFixed(
 			2
