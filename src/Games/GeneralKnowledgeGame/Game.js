@@ -9,14 +9,12 @@ function Game({
 	difficulty,
 	category,
 	numberOfQuestions,
-	setIsPlaying,
 	sessionToken,
 }) {
 	const { status, currentQuestion, answerCallback, error } = useQuiz(
 		difficulty,
 		category,
 		numberOfQuestions,
-		setIsPlaying,
 		sessionToken
 	);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 
 import { globalState } from "./../../../App";
 import useFetchQuestions from "./useFetchQuestions";
@@ -7,7 +7,6 @@ function useQuiz(
 	difficulty,
 	category,
 	numberOfQuestions,
-	setIsPlaying,
 	sessionToken
 ) {
 	const { dispatch } = useContext(globalState);
@@ -37,14 +36,14 @@ function useQuiz(
 		}
 	}, [answers, dispatch, questions, questionIndex]);
 
-	const answerCallback = (answerGiven) => {
+	const answerCallback = useCallback((answerGiven) => {
 		if (answerGiven === questions[questionIndex].correct_answer) {
 			setAnswers((arr) => [...arr, 1]);
 		} else {
 			setAnswers((arr) => [...arr, 0]);
 		}
 		setQuestionIndex((c) => c + 1);
-	};
+	},[questionIndex]);
 
 	return {
 		status,

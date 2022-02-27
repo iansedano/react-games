@@ -1,48 +1,38 @@
+// Library imports
 import { createContext, useReducer, useEffect } from "react";
 
+// Component imports
+import PageNavButton from "./Components/PageNavButton";
+import Error from "./Components/Error"
+
+// State imports
+import reducer from "./State/reducer";
+import DEFAULT_STATE from "./State/defaultState"
+
+// Project imports
 import Home from "./Home";
 import HeaderBar from "./HeaderBar";
-import PageNavButton from "./Components/PageNavButton";
 import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
 import ConnectFour from "./Games/ConnectFour/ConnectFour";
 import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
 
-import reducer from "./Reducers/reducer";
-
+// CSS
 import "./App.css";
 import "./Utility.css";
 
 export const globalState = createContext();
 
-const defaultState = {
-	siteSettings: {
-		darkMode: false,
-		page: "home",
-	},
-	user: {
-		name: "Nomad",
-		lastLogin: new Date(),
-		preferredGame: null,
-	},
-	games: {
-		timesTable: { timesPlayed: 0 },
-		connectFour: { timesPlayed: 0 },
-		generalKnowledge: {
-			timesPlayed: 0,
-			settings: {
-				numberOfQuestions: 10,
-				difficulty: "",
-				category: "",
-			},
-			answers: [],
-		},
-	},
-};
-
 const localStorageKey = "USER_DATA";
 
+const PAGES = {
+	"home": <Home />,
+	"timesTableGame": <TimesTableGame />,
+	"connectFour": <ConnectFour />,
+	"generalKnowledgeGame": <GeneralKnowledgeGame />
+}
+
 function App() {
-	const [state, dispatch] = useReducer(reducer, defaultState, (init) => {
+	const [state, dispatch] = useReducer(reducer, DEFAULT_STATE, (init) => {
 		return JSON.parse(localStorage.getItem(localStorageKey)) || init;
 	});
 
@@ -56,31 +46,12 @@ function App() {
 		} else document.body.classList.remove("dark-mode");
 	}, [state.siteSettings.darkMode]);
 
-	let page;
-
-	switch (state.siteSettings.page) {
-		case "home":
-			page = <Home />;
-			break;
-		case "timesTableGame":
-			page = <TimesTableGame />;
-			break;
-		case "connectFour":
-			page = <ConnectFour />;
-			break;
-		case "generalKnowledgeGame":
-			page = <GeneralKnowledgeGame />;
-			break;
-		default:
-			return new Error();
-	}
-
 	return (
 		<globalState.Provider value={{ state, dispatch }}>
 			<main className="flex-col full-width">
 				<HeaderBar />
-				{page}
-				{state.siteSettings.page !== "home" ? (
+				{PAGES[state.siteSettings.page] || <Error/>}
+				{state.siteSettings.page !== "home" ? ( // if page not home then no need for button
 					<PageNavButton page="home">Home</PageNavButton>
 				) : null}
 				<HeaderBar />

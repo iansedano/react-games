@@ -1,50 +1,3 @@
-/*
-ACTION TYPES
-
-siteSettings
-	darkModeToggle
-userInfo
-	setName
-	setLastLogin
-	refreshFavoriteGame
-gameInfo
-	generalKnowledgeGame
-		incrementTimesPlayes
-		settings
-			set
-
-
-interface gameSiteState {
-	siteSettings: {
-		darkMode: boolean,
-	};
-	user: {
-		name: string,
-		lastLogin: Date,
-		preferredGame: string,
-	};
-	games: {
-		timesTable: {},
-		connectFour: {},
-		generalKnowledge: {
-			timesPlayed: number,
-			settings: {
-				numberOfQuestions: number,
-				difficulty: string,
-				sessionToken: string,
-			},
-			answers: [
-				{
-					date: Date,
-					correct: boolean,
-					category: number,
-					difficulty: string,
-				}
-			],
-		},
-	};
-}
-*/
 import siteSettingsReducer from "./siteSettingsReducer";
 import userInfoReducer from "./userInfoReducer";
 import gameInfoReducer from "./gameInfoReducer";
@@ -61,6 +14,17 @@ function reducer(state, action) {
 		case "userInfo":
 			return userInfoReducer(state, actionWithShortenedType);
 		case "gameInfo":
+			return gameInfoReducer(state, actionWithShortenedType);
+		default:
+			throw new Error("invalid root action type");
+	}
+
+	switch (splitAction[0]) {
+		case "TOGGLE_DARK_MODE":
+			return siteSettingsReducer(state, actionWithShortenedType);
+		case "CHANGE_PAGE":
+			return userInfoReducer(state, actionWithShortenedType);
+		case "GK_UPDATE_SETTINGS":
 			return gameInfoReducer(state, actionWithShortenedType);
 		default:
 			throw new Error("invalid root action type");

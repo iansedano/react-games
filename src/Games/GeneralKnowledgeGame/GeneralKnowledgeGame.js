@@ -36,7 +36,6 @@ function GeneralKnowledgeGame() {
 								numberOfQuestions={
 									GKState.settings.numberOfQuestions
 								}
-								setIsPlaying={setIsPlaying}
 								sessionToken={sessionToken}
 							/>
 							<Button onClick={() => setIsPlaying((p) => !p)}>
