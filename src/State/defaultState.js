@@ -31,7 +31,7 @@ const DEFAULT_STATE = {
 	userName: "Nomad",
 	lastLogin: new Date(),
 	quizTimesPlayed: 0,
-	quizNumberOfQuestionsSet: 10,
+	quizNumberOfQuestionsSet: 3,
 	quizDifficultySet: "",
 	quizCategorySet: "",
 	quizAnswers: [],

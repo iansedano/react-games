@@ -9,19 +9,18 @@ import FormTextInput from "./../../Components/FormTextInput";
 // https://reactjs.org/docs/refs-and-the-dom.html
 
 function Settings({
-	formState,
-	setFormState,
-	saveSettings,
+	settings,
+	setSettings,
 	setIsPlaying,
 	cachedQuestionCategories,
 }) {
 	const submitHandler = (e) => {
 		e.preventDefault();
-		if (saveSettings()) setIsPlaying((p) => !p);
+		setIsPlaying((p) => !p);
 	};
 
 	const changeHandler = (e) => {
-		setFormState(e.target.id, e.target.value);
+		setSettings(e.target.id, e.target.value);
 	};
 
 	return (
@@ -31,17 +30,17 @@ function Settings({
 		>
 			<FormTextInput
 				name="numberOfQuestions"
-				value={formState.numberOfQuestions}
+				value={settings.numberOfQuestions}
 				onChange={changeHandler}
 			>
 				Number of Questions
 			</FormTextInput>
 			<DifficultySelector
-				selectedDifficulty={formState.difficulty}
+				selectedDifficulty={settings.difficulty}
 				onChange={changeHandler}
 			/>
 			<CategorySelector
-				selectedCategory={formState.category}
+				selectedCategory={settings.category}
 				cachedQuestionCategories={cachedQuestionCategories}
 				onChange={changeHandler}
 			/>

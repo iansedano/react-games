@@ -40,8 +40,8 @@ function GeneralKnowledgeGame() {
 						<>
 							{
 								<Settings
-									formState={settings}
-									setFormState={setSettings}
+									settings={settings}
+									setSettings={setSettings}
 									setIsPlaying={setIsPlaying}
 									cachedQuestionCategories={
 										cachedQuestionCategories

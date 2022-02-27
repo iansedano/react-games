@@ -2,6 +2,9 @@ import { useState, useEffect, useContext, useCallback } from "react";
 
 import { globalState } from "./../../../App";
 import useFetchQuestions from "./useFetchQuestions";
+import { STATUS } from "./../../../Hooks/useFetch";
+
+import ACTIONS from "./../../../State/ACTIONS";
 
 function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 	const { dispatch } = useContext(globalState);
@@ -11,25 +14,31 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 		numberOfQuestions,
 		sessionToken
 	);
+
 	// questionIndex for the question the player is currenty answering,
 	// and a way to know if the quiz has ended.
 	const [questionIndex, setQuestionIndex] = useState(0);
+	let quizFinished = false;
+	if (questions) {
+		if (questions[questionIndex] === undefined) {
+			quizFinished = true;
+		}
+	}
+
 	// answers as a store of the questions answered, 1 for correct, 0 for wrong.
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {
-		if (questions) {
-			if (!questions[questionIndex]) {
-				dispatch({
-					type: "gameInfo/generalKnowledgeGame/addAnswers",
-					payload: answers,
-				});
-				dispatch({
-					type: "gameInfo/generalKnowledgeGame/incrementTimesPlayed",
-				});
-			}
+		if (quizFinished) {
+			dispatch({
+				type: ACTIONS.QUIZ_ADD_ANSWERS,
+				payload: answers,
+			});
+			dispatch({
+				type: ACTIONS.QUIZ_INCREMENT_TIMES_PLAYED,
+			});
 		}
-	}, [answers, dispatch, questions, questionIndex]);
+	}, [quizFinished, answers, dispatch]);
 
 	const answerCallback = useCallback(
 		(answerGiven) => {
@@ -40,7 +49,7 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 			}
 			setQuestionIndex((c) => c + 1);
 		},
-		[questionIndex]
+		[questions, questionIndex]
 	);
 
 	return {
