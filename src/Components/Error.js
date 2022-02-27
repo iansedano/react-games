@@ -1,8 +1,9 @@
-function Error({children}) {
+function Error({ children }) {
 	return (
-		<h1>
-			{children}
-		</h1>
+		<>
+			<h1>There has been an error!</h1>
+			<p>{children}</p>
+		</>
 	);
 }
 

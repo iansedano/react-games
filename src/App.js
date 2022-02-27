@@ -3,15 +3,16 @@ import { createContext, useReducer, useEffect } from "react";
 
 // Component imports
 import PageNavButton from "./Components/PageNavButton";
-import Error from "./Components/Error"
+import Error from "./Components/Error";
+import HeaderBar from "./HeaderBar";
 
 // State imports
 import reducer from "./State/reducer";
-import DEFAULT_STATE from "./State/defaultState"
+import DEFAULT_STATE from "./State/defaultState";
+import PAGES from "./State/PAGES";
 
-// Project imports
+// Page imports
 import Home from "./Home";
-import HeaderBar from "./HeaderBar";
 import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
 import ConnectFour from "./Games/ConnectFour/ConnectFour";
 import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
@@ -23,13 +24,6 @@ import "./Utility.css";
 export const globalState = createContext();
 
 const localStorageKey = "USER_DATA";
-
-const PAGES = {
-	"home": <Home />,
-	"timesTableGame": <TimesTableGame />,
-	"connectFour": <ConnectFour />,
-	"generalKnowledgeGame": <GeneralKnowledgeGame />
-}
 
 function App() {
 	const [state, dispatch] = useReducer(reducer, DEFAULT_STATE, (init) => {
@@ -46,12 +40,32 @@ function App() {
 		} else document.body.classList.remove("dark-mode");
 	}, [state.siteSettings.darkMode]);
 
+	let page;
+
+	switch (state.page) {
+		case PAGES.HOME:
+			page = <Home />;
+			break;
+		case PAGES.CONNECT_FOUR:
+			page = <ConnectFour />;
+			break;
+		case PAGES.GENERAL_KNOWLEDGE_GAME:
+			page = <GeneralKnowledgeGame />;
+			break;
+		case PAGES.TIMES_TABLE_GAME:
+			page = <TimesTableGame />;
+			break;
+		default:
+			page = <Error />;
+			break;
+	}
+
 	return (
 		<globalState.Provider value={{ state, dispatch }}>
 			<main className="flex-col full-width">
 				<HeaderBar />
-				{PAGES[state.siteSettings.page] || <Error/>}
-				{state.siteSettings.page !== "home" ? ( // if page not home then no need for button
+				{page}
+				{state.page !== "home" ? ( // if page not home then no need for button
 					<PageNavButton page="home">Home</PageNavButton>
 				) : null}
 				<HeaderBar />

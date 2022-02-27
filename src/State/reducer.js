@@ -2,6 +2,9 @@ import siteSettingsReducer from "./siteSettingsReducer";
 import userInfoReducer from "./userInfoReducer";
 import gameInfoReducer from "./gameInfoReducer";
 
+import ACTIONS from "./ACTIONS";
+import PAGES from "./PAGES";
+
 function reducer(state, action) {
 	const splitAction = action.type.split("/");
 	const actionWithShortenedType = {
@@ -19,13 +22,17 @@ function reducer(state, action) {
 			throw new Error("invalid root action type");
 	}
 
-	switch (splitAction[0]) {
-		case "TOGGLE_DARK_MODE":
-			return siteSettingsReducer(state, actionWithShortenedType);
-		case "CHANGE_PAGE":
-			return userInfoReducer(state, actionWithShortenedType);
-		case "GK_UPDATE_SETTINGS":
-			return gameInfoReducer(state, actionWithShortenedType);
+	switch (action.type) {
+		case ACTIONS.TOGGLE_DARK_MODE:
+			return { ...state, darkMode: !state.darkMode };
+		case ACTIONS.CHANGE_PAGE:
+			return { ...state, page: PAGES[action.payload] };
+		case ACTIONS.QUIZ_UPDATE_SETTINGS:
+			return {};
+		case ACTIONS.QUIZ_ADD_ANSWERS:
+		case ACTIONS.QUIZ_RESET_ANSWERS:
+		case ACTIONS.QUIZ_INCREMENT_TIMES_PLAYED:
+
 		default:
 			throw new Error("invalid root action type");
 	}
