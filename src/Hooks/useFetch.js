@@ -12,6 +12,7 @@ export const DEFAULT_FETCH_OPTIONS = {
 };
 
 function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
+	console.log(url, options)
 	const [response, setResponse] = useState(null);
 	const [error, setError] = useState(null);
 	const [status, setStatus] = useState(STATUS.pending);
@@ -45,7 +46,7 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 			}
 			setStatus(STATUS.resolved);
 		}
-	}, [url, options.abort, options.cacheValue, response, error]);
+	}, [url, options.abort, options.cacheValue, response, error, status]);
 
 	return { status, error, response };
 }
