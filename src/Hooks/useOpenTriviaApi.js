@@ -1,4 +1,4 @@
-import useFetch, { STATUS, DEFAULT_FETCH_OPTIONS } from "./../../../Hooks/useFetch";
+import useFetch, { STATUS, DEFAULT_FETCH_OPTIONS } from "./useFetch";
 
 const openTriviaResponseCodes = {
 	0: "Success",
@@ -9,10 +9,9 @@ const openTriviaResponseCodes = {
 };
 
 function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
-	
 	const url = "https://opentdb.com/" + endpoint;
 	const { status, error, response } = useFetch(url, options);
-	
+
 	if (status === STATUS.resolved) {
 		if (response.response_code !== openTriviaResponseCodes[0]) {
 			return {

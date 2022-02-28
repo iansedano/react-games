@@ -1,4 +1,4 @@
-import FormSelectInput from "./../../Components/FormSelectInput";
+import FormSelectInput from "./../Components/FormSelectInput";
 
 function DifficultySelector({ selectedDifficulty, onChange }) {
 	const difficultyOptions = [

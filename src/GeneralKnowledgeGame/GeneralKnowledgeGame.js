@@ -1,9 +1,9 @@
 import { useState, useContext, useRef } from "react";
 
-import Button from "./../../Components/Button";
+import Button from "./../Components/Button";
 
-import useGameSettings from "./Hooks/useGameSettings";
-import useToken from "./Hooks/useToken";
+import useGameSettings from "./../Hooks/useGameSettings";
+import useToken from "./../Hooks/useToken";
 import Settings from "./Settings";
 import Stats from "./Stats";
 import Game from "./Game";

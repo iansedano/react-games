@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { STATUS } from "./../../../Hooks/useFetch"
+import { STATUS } from "./useFetch";
 
 import useOpenTriviaApi from "./useOpenTriviaApi";
 

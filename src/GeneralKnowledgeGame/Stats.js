@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import Button from "./../../Components/Button";
-import { globalState } from "./../../App";
-import ACTIONS from "./../../State/ACTIONS";
+import Button from "./../Components/Button";
+import { globalState } from "./../App";
+import ACTIONS from "./../State/ACTIONS";
 
 function Stats() {
 	const { state, dispatch } = useContext(globalState);

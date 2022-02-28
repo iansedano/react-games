@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import he from "he";
 
-import { STATUS } from "./../../../Hooks/useFetch"
+import { STATUS } from "./useFetch";
 
 import useOpenTriviaApi from "./useOpenTriviaApi";
-
 
 /*
 
@@ -47,7 +46,7 @@ function useFetchQuestions(
 			return root + params.filter((p) => p !== "").join("&");
 		})()
 	);
-	
+
 	useEffect(() => {
 		if (status === STATUS.resolved) {
 			setQuestions(
@@ -63,9 +62,7 @@ function useFetchQuestions(
 				})
 			);
 		}
-	}, [status, response])
-
-	
+	}, [status, response]);
 
 	return { status, error, questions };
 }

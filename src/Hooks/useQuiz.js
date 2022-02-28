@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext, useCallback } from "react";
 
-import { globalState } from "./../../../App";
+import { globalState } from "../App";
 import useFetchQuestions from "./useFetchQuestions";
-import { STATUS } from "./../../../Hooks/useFetch";
+import { STATUS } from "./useFetch";
 
-import ACTIONS from "./../../../State/ACTIONS";
+import ACTIONS from "../State/ACTIONS";
 
 function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 	const { dispatch } = useContext(globalState);

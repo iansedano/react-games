@@ -13,9 +13,9 @@ import PAGES from "./State/PAGES";
 
 // Page imports
 import Home from "./Home";
-import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
-import ConnectFour from "./Games/ConnectFour/ConnectFour";
-import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
+import TimesTableGame from "./TimesTableGame/TimesTableGame";
+import ConnectFour from "./ConnectFour/ConnectFour";
+import GeneralKnowledgeGame from "./GeneralKnowledgeGame/GeneralKnowledgeGame";
 
 // CSS
 import "./App.css";
