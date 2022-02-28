@@ -1,8 +1,8 @@
 import BounceLoader from "react-spinners/BounceLoader";
 
-import { STATUS } from "./../Hooks/useFetch";
+import { STATUS } from "../Hooks/useFetch";
 
-import useQuiz from "./../Hooks/useQuiz";
+import useQuiz from "../Hooks/useQuiz";
 import Question from "./Question";
 
 function Game({ difficulty, category, numberOfQuestions, sessionToken }) {

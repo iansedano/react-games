@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, useCallback } from "react";
 
 import { globalState } from "../App";
 import useFetchQuestions from "./useFetchQuestions";
-import { STATUS } from "./useFetch";
+// import { STATUS } from "./useFetch";
 
 import ACTIONS from "../State/ACTIONS";
 

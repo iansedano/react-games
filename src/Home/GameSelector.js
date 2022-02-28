@@ -15,7 +15,7 @@ function GameSelector() {
 				<PageNavButton page={PAGES.CONNECT_FOUR}>
 					Connect Four
 				</PageNavButton>
-				<PageNavButton page={PAGES.GENERAL_KNOWLEDGE_GAME}>
+				<PageNavButton page={PAGES.QUIZ_GAME}>
 					General Knowledge
 				</PageNavButton>
 			</div>

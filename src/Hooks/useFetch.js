@@ -12,7 +12,7 @@ export const DEFAULT_FETCH_OPTIONS = {
 };
 
 function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
-	// if (options.abort !== true) console.log(url) // DEBUG
+	if (options.abort !== true) console.log(url); // DEBUG
 	const [response, setResponse] = useState(null);
 	const [error, setError] = useState(null);
 	const [status, setStatus] = useState(STATUS.pending);

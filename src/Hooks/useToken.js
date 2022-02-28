@@ -1,7 +1,8 @@
+// Library imports
 import { useRef } from "react";
 
+// Hook imports
 import { STATUS } from "./useFetch";
-
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
 function useToken() {

@@ -1,23 +1,9 @@
+// Library imports
 import { useState } from "react";
 
+// Hook imports
 import { STATUS } from "./useFetch";
-
 import useOpenTriviaApi from "./useOpenTriviaApi";
-
-function prepareCategoryList(response) {
-	const sortedCategoryOptions = [...response.trivia_categories].sort((a, b) =>
-		a.name < b.name ? -1 : 1
-	);
-
-	// "Any" category should go first because
-	// the default option should be at the top,
-	// while the rest should be alphabetical order.
-	sortedCategoryOptions.unshift({ id: "", name: "Any" });
-
-	return sortedCategoryOptions.map((option) => {
-		return { name: option.name, value: option.id };
-	});
-}
 
 function useCategoryOptions(cachedQuestionCategories) {
 	const [categoryOptions, setCategoryOptions] = useState([
@@ -56,3 +42,18 @@ function useCategoryOptions(cachedQuestionCategories) {
 }
 
 export default useCategoryOptions;
+
+function prepareCategoryList(response) {
+	const sortedCategoryOptions = [...response.trivia_categories].sort((a, b) =>
+		a.name < b.name ? -1 : 1
+	);
+
+	// "Any" category should go first because
+	// the default option should be at the top,
+	// while the rest should be alphabetical order.
+	sortedCategoryOptions.unshift({ id: "", name: "Any" });
+
+	return sortedCategoryOptions.map((option) => {
+		return { name: option.name, value: option.id };
+	});
+}

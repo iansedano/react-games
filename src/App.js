@@ -14,7 +14,7 @@ import PAGES from "./State/PAGES";
 import Home from "./Home/Home";
 import TimesTableGame from "./TimesTableGame/TimesTableGame";
 import ConnectFour from "./ConnectFour/ConnectFour";
-import GeneralKnowledgeGame from "./GeneralKnowledgeGame/GeneralKnowledgeGame";
+import QuizApp from "./QuizGame/QuizApp";
 
 import HeaderBar from "./HeaderBar";
 
@@ -50,8 +50,8 @@ function App() {
 		case PAGES.CONNECT_FOUR:
 			page = <ConnectFour />;
 			break;
-		case PAGES.GENERAL_KNOWLEDGE_GAME:
-			page = <GeneralKnowledgeGame />;
+		case PAGES.QUIZ_GAME:
+			page = <QuizApp />;
 			break;
 		case PAGES.TIMES_TABLE_GAME:
 			page = <TimesTableGame />;
@@ -67,7 +67,7 @@ function App() {
 				<HeaderBar />
 				{page}
 				{state.page !== "home" ? ( // if page not home then no need for button
-					<PageNavButton page="home">Home</PageNavButton>
+					<PageNavButton page={PAGES.HOME}>Home</PageNavButton>
 				) : null}
 				<HeaderBar />
 			</main>

@@ -1,9 +1,9 @@
 import BounceLoader from "react-spinners/BounceLoader";
 
-import { STATUS } from "./../Hooks/useFetch";
-import FormSelectInput from "./../Components/FormSelectInput";
+import { STATUS } from "../Hooks/useFetch";
+import FormSelectInput from "../Components/FormSelectInput";
 
-import useCategoryOptions from "./../Hooks/useCategoryOptions";
+import useCategoryOptions from "../Hooks/useCategoryOptions";
 
 function CategorySelector({
 	selectedCategory,
