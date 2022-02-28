@@ -4,7 +4,6 @@ import { createContext, useReducer, useEffect } from "react";
 // Component imports
 import PageNavButton from "./Components/PageNavButton";
 import Error from "./Components/Error";
-import HeaderBar from "./HeaderBar";
 
 // State imports
 import reducer from "./State/reducer";
@@ -12,10 +11,12 @@ import DEFAULT_STATE from "./State/defaultState";
 import PAGES from "./State/PAGES";
 
 // Page imports
-import Home from "./Home";
+import Home from "./Home/Home";
 import TimesTableGame from "./TimesTableGame/TimesTableGame";
 import ConnectFour from "./ConnectFour/ConnectFour";
 import GeneralKnowledgeGame from "./GeneralKnowledgeGame/GeneralKnowledgeGame";
+
+import HeaderBar from "./HeaderBar";
 
 // CSS
 import "./App.css";

@@ -1,9 +1,12 @@
+// Library imports
 import { useContext } from "react";
 
-import { globalState } from "./App";
+// Component imports
 import Toggle from "./Components/Toggle";
 
+// State imports
 import ACTIONS from "./State/ACTIONS";
+import { globalState } from "./App";
 
 function HeaderBar() {
 	const { state, dispatch } = useContext(globalState);

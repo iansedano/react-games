@@ -1,7 +1,7 @@
 // https://avatars.dicebear.com/docs/http-api
 // `https://avatars.dicebear.com/api/bottts/${name}.svg`
 import { useContext } from "react";
-import { globalState } from "./App";
+import { globalState } from "./../App";
 
 function UserProfile() {
 	const { state } = useContext(globalState);

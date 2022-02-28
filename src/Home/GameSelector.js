@@ -1,6 +1,8 @@
-import PageNavButton from "./Components/PageNavButton";
+// Component imports
+import PageNavButton from "./../Components/PageNavButton";
 
-import PAGES from "./State/PAGES";
+// State imports
+import PAGES from "./../State/PAGES";
 
 function GameSelector() {
 	return (
