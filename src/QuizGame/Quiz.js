@@ -1,5 +1,5 @@
 // Library imports
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 // Component imports
 import Button from "../Components/Button";
@@ -13,7 +13,6 @@ import Stats from "./Stats";
 import Game from "./Game";
 
 function Quiz({ cachedQuestionCategories, sessionToken }) {
-	// Hooks
 	const [settings, setSettings] = useGameSettings();
 	const [isPlaying, setIsPlaying] = useState(false);
 
