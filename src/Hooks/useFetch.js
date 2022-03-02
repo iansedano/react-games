@@ -1,3 +1,4 @@
+// Library imports
 import { useState, useEffect } from "react";
 
 export const STATUS = {
@@ -26,7 +27,7 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 
 	useEffect(() => {
 		const request = async () => {
-			console.log("actually fectching", url);
+			console.log("Fectching", url);
 
 			let response;
 

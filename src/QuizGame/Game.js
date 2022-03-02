@@ -13,7 +13,7 @@ function Game({ difficulty, category, numberOfQuestions, sessionToken }) {
 		sessionToken
 	);
 
-	if (status === STATUS.pending) {
+	if (status === STATUS.idle || status == STATUS.fetching) {
 		return <BounceLoader />;
 	} else if (status === STATUS.rejected) {
 		return <h3>{error}</h3>;

@@ -1,6 +1,3 @@
-// Library imports
-import { useState } from "react";
-
 // Hook imports
 import { STATUS, DEFAULT_FETCH_OPTIONS } from "./useFetch";
 import useOpenTriviaApi from "./useOpenTriviaApi";
@@ -8,7 +5,8 @@ import useOpenTriviaApi from "./useOpenTriviaApi";
 function useCategoryOptions(cachedQuestionCategories) {
 	let requestOptions = { ...DEFAULT_FETCH_OPTIONS };
 
-	if (cachedQuestionCategories.current !== undefined) {
+	// If there are cached questions abort request
+	if (cachedQuestionCategories.current) {
 		requestOptions.abort = true;
 		requestOptions.cacheValue = cachedQuestionCategories.current;
 	}

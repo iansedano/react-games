@@ -1,8 +1,9 @@
+// Library imports
 import { useState, useEffect } from "react";
 import he from "he";
 
+// Hook imports
 import { STATUS } from "./useFetch";
-
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
 /*
@@ -33,7 +34,8 @@ function useFetchQuestions(
 ) {
 	const [questions, setQuestions] = useState(null);
 
-	const buildUrl = () => {
+	// Build query string based on parameters
+	const buildQueryString = () => {
 		const root = "api.php?";
 		const params = [
 			difficulty ? `difficulty=${difficulty}` : "",
@@ -44,9 +46,7 @@ function useFetchQuestions(
 		return root + params.filter((p) => p !== "").join("&");
 	};
 
-	const { status, error, response } = useOpenTriviaApi(buildUrl());
-
-	console.log({ status, error, response });
+	const { status, error, response } = useOpenTriviaApi(buildQueryString());
 
 	useEffect(() => {
 		if (status === STATUS.resolved) {

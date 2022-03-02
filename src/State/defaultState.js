@@ -1,28 +1,3 @@
-// const DEFAULT_STATE = {
-// 	siteSettings: {
-// 		darkMode: false,
-// 		page: "home",
-// 	},
-// 	user: {
-// 		name: "Nomad",
-// 		lastLogin: new Date(),
-// 		preferredGame: null,
-// 	},
-// 	games: {
-// 		timesTable: { timesPlayed: 0 },
-// 		connectFour: { timesPlayed: 0 },
-// 		generalKnowledge: {
-// 			timesPlayed: 0,
-// 			settings: {
-// 				numberOfQuestions: 10,
-// 				difficulty: "",
-// 				category: "",
-// 			},
-// 			answers: [],
-// 		},
-// 	},
-// };
-
 import PAGES from "./PAGES";
 
 const DEFAULT_STATE = {
@@ -38,7 +13,6 @@ const DEFAULT_STATE = {
 	quizDifficultySet: "",
 	quizCategorySet: "",
 	quizAnswers: [],
-	sessionToken: "",
 
 	// Other Games
 	timesTableTimesPlayed: 0,

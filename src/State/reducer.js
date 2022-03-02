@@ -2,22 +2,6 @@ import ACTIONS from "./ACTIONS";
 import PAGES from "./PAGES";
 
 function reducer(state, action) {
-	// const splitAction = action.type.split("/");
-	// const actionWithShortenedType = {
-	// 	...action,
-	// 	type: splitAction.slice(1).join("/"),
-	// };
-	// switch (splitAction[0]) {
-	// 	case "siteSettings":
-	// 		return siteSettingsReducer(state, actionWithShortenedType);
-	// 	case "userInfo":
-	// 		return userInfoReducer(state, actionWithShortenedType);
-	// 	case "gameInfo":
-	// 		return gameInfoReducer(state, actionWithShortenedType);
-	// 	default:
-	// 		throw new Error("invalid root action type");
-	// }
-
 	switch (action.type) {
 		// --- Site Actions ---
 		case ACTIONS.TOGGLE_DARK_MODE:
@@ -48,7 +32,8 @@ function reducer(state, action) {
 
 		// ---
 		default:
-			throw new Error("invalid action type");
+			console.error("invalid action type");
+			return state;
 	}
 }
 

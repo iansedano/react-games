@@ -1,10 +1,12 @@
+// Library imports
 import BounceLoader from "react-spinners/BounceLoader";
 
+// Component imports
 import Error from "./../Components/Error";
-
-import { STATUS } from "../Hooks/useFetch";
 import FormSelectInput from "../Components/FormSelectInput";
 
+// Hook imports
+import { STATUS } from "../Hooks/useFetch";
 import useCategoryOptions from "../Hooks/useCategoryOptions";
 
 function CategorySelector({

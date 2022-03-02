@@ -1,6 +1,7 @@
+// Hook imports
 import useFetch, { STATUS, DEFAULT_FETCH_OPTIONS } from "./useFetch";
 
-const openTriviaResponseCodes = {
+const OPEN_TRIVIA_RESPONSE_CODES = {
 	0: "Success",
 	1: "No Results",
 	2: "Invalid Parameter",
@@ -12,19 +13,15 @@ function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
 	const url = "https://opentdb.com/" + endpoint;
 	const { status, error, response } = useFetch(url, options);
 
-	console.log({ endpoint });
-
 	if (status === STATUS.resolved) {
-		if (response.response_code !== openTriviaResponseCodes[0]) {
+		if (response.response_code !== OPEN_TRIVIA_RESPONSE_CODES[0]) {
 			return {
 				status: status,
-				error: openTriviaResponseCodes[response.response_code],
+				error: OPEN_TRIVIA_RESPONSE_CODES[response.response_code],
 				response: response,
 			};
 		}
 	}
-
-	console.log(status, "FROM useOpenTriviaApi", response);
 
 	return { status, error, response };
 }
