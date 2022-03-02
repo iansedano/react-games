@@ -54,6 +54,7 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 
 	return {
 		status,
+		quizFinished,
 		currentQuestion: questions ? questions[questionIndex] : null,
 		answerCallback,
 		error,

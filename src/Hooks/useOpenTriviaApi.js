@@ -14,9 +14,13 @@ function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
 	const { status, error, response } = useFetch(url, options);
 
 	if (status === STATUS.resolved) {
-		if (response.response_code !== OPEN_TRIVIA_RESPONSE_CODES[0]) {
+		// The call to certain endpoints do not return a status code
+		// This is probably an oversight in the API design
+		if (!response.response_code) return { status, error, response };
+
+		if (response.response_code !== 0) {
 			return {
-				status: status,
+				status: STATUS.rejected,
 				error: OPEN_TRIVIA_RESPONSE_CODES[response.response_code],
 				response: response,
 			};

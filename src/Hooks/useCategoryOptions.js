@@ -16,7 +16,7 @@ function useCategoryOptions(cachedQuestionCategories) {
 		requestOptions
 	);
 
-	if (status === STATUS.resolved && requestOptions.abort == false) {
+	if (status === STATUS.resolved && requestOptions.abort === false) {
 		const output = prepareCategoryList(response);
 		cachedQuestionCategories.current = output;
 	}

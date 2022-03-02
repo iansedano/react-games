@@ -1,8 +1,13 @@
-import CategorySelector from "./CategorySelector";
-import DifficultySelector from "./DifficultySelector";
+import { useContext } from "react";
 
 import Button from "../Components/Button";
 import FormTextInput from "../Components/FormTextInput";
+
+import { globalState } from "./../App";
+import ACTIONS from "./../State/ACTIONS";
+
+import CategorySelector from "./CategorySelector";
+import DifficultySelector from "./DifficultySelector";
 
 // https://reactjs.org/docs/forms.html
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
@@ -14,8 +19,11 @@ function Settings({
 	setIsPlaying,
 	cachedQuestionCategories,
 }) {
+	const { dispatch } = useContext(globalState);
+
 	const submitHandler = (e) => {
 		e.preventDefault();
+		dispatch({ type: ACTIONS.QUIZ_UPDATE_SETTINGS, payload: settings });
 		setIsPlaying((p) => !p);
 	};
 
