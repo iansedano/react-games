@@ -2,21 +2,15 @@
 import { useState } from "react";
 
 // Hook imports
-import { STATUS } from "./useFetch";
+import { STATUS, DEFAULT_FETCH_OPTIONS } from "./useFetch";
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
 function useCategoryOptions(cachedQuestionCategories) {
-	const [categoryOptions, setCategoryOptions] = useState([
-		{ name: "awaiting response from server" },
-	]);
-
-	let requestOptions = {};
+	let requestOptions = { ...DEFAULT_FETCH_OPTIONS };
 
 	if (cachedQuestionCategories.current !== undefined) {
 		requestOptions.abort = true;
 		requestOptions.cacheValue = cachedQuestionCategories.current;
-	} else {
-		requestOptions.abort = false;
 	}
 
 	const { status, error, response } = useOpenTriviaApi(
@@ -24,21 +18,12 @@ function useCategoryOptions(cachedQuestionCategories) {
 		requestOptions
 	);
 
-	if (
-		status === STATUS.resolved &&
-		cachedQuestionCategories.current === undefined
-	) {
+	if (status === STATUS.resolved && requestOptions.abort == false) {
 		const output = prepareCategoryList(response);
 		cachedQuestionCategories.current = output;
-		setCategoryOptions(output);
-	} else if (
-		cachedQuestionCategories.current !== undefined &&
-		cachedQuestionCategories.current !== categoryOptions
-	) {
-		setCategoryOptions(cachedQuestionCategories.current);
 	}
 
-	return { status, error, categoryOptions };
+	return { status, error };
 }
 
 export default useCategoryOptions;

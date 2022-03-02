@@ -33,19 +33,20 @@ function useFetchQuestions(
 ) {
 	const [questions, setQuestions] = useState(null);
 
-	const { status, error, response } = useOpenTriviaApi(
-		// IIFE to build the url based on the hook parameters
-		(() => {
-			const root = "api.php?";
-			const params = [
-				difficulty ? `difficulty=${difficulty}` : "",
-				category ? `category=${category}` : "",
-				numberOfQuestions ? `amount=${numberOfQuestions}` : "",
-				sessionToken ? `token=${sessionToken}` : "",
-			];
-			return root + params.filter((p) => p !== "").join("&");
-		})()
-	);
+	const buildUrl = () => {
+		const root = "api.php?";
+		const params = [
+			difficulty ? `difficulty=${difficulty}` : "",
+			category ? `category=${category}` : "",
+			numberOfQuestions ? `amount=${numberOfQuestions}` : "",
+			sessionToken ? `token=${sessionToken}` : "",
+		];
+		return root + params.filter((p) => p !== "").join("&");
+	};
+
+	const { status, error, response } = useOpenTriviaApi(buildUrl());
+
+	console.log({ status, error, response });
 
 	useEffect(() => {
 		if (status === STATUS.resolved) {

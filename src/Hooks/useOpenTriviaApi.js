@@ -12,6 +12,8 @@ function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
 	const url = "https://opentdb.com/" + endpoint;
 	const { status, error, response } = useFetch(url, options);
 
+	console.log({ endpoint });
+
 	if (status === STATUS.resolved) {
 		if (response.response_code !== openTriviaResponseCodes[0]) {
 			return {
@@ -21,6 +23,8 @@ function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
 			};
 		}
 	}
+
+	console.log(status, "FROM useOpenTriviaApi", response);
 
 	return { status, error, response };
 }
