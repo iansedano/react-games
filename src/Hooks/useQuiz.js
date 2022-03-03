@@ -1,9 +1,19 @@
-import { useState, useEffect, useContext, useCallback } from "react";
+/**
+ * Top-level hook to manage
+ * 	- fetching questions, via useFetchQuestions
+ * 	- serving questions in order
+ * 	- signalling when quiz has ended
+ * 	- dispatching actions on quiz ending
+ */
 
-import { globalState } from "../App";
+// Library imports
+import { useCallback, useContext, useEffect, useState } from "react";
+
+// Hook imports
 import useFetchQuestions from "./useFetchQuestions";
-// import { STATUS } from "./useFetch";
 
+// State imports
+import { globalState } from "../App";
 import ACTIONS from "../State/ACTIONS";
 
 function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
@@ -15,8 +25,6 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 		sessionToken
 	);
 
-	// questionIndex for the question the player is currenty answering,
-	// and a way to know if the quiz has ended.
 	const [questionIndex, setQuestionIndex] = useState(0);
 	let quizFinished = false;
 	if (questions) {
@@ -25,7 +33,7 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 		}
 	}
 
-	// answers as a store of the questions answered, 1 for correct, 0 for wrong.
+	// Answers as an array of the questions answered, 1 for correct, 0 for wrong.
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {

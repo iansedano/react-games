@@ -16,28 +16,30 @@ function CategorySelector({
 }) {
 	const { status, error } = useCategoryOptions(cachedQuestionCategories);
 
-	if (status === STATUS.fetching || status === STATUS.idle) {
-		return <BounceLoader />;
-	} else if (status === STATUS.resolved) {
-		return (
-			<FormSelectInput
-				name="category"
-				value={selectedCategory}
-				optionNames={cachedQuestionCategories.current.map(
-					(option) => option.name
-				)}
-				optionValues={cachedQuestionCategories.current.map(
-					(option) => option.value
-				)}
-				onChange={onChange}
-			>
-				Category
-			</FormSelectInput>
-		);
-	} else if (status === STATUS.rejected) {
-		return <Error>{error}</Error>;
-	} else {
-		return null;
+	switch (status) {
+		case STATUS.idle:
+		case STATUS.fetching:
+			return <BounceLoader />;
+		case STATUS.resolved:
+			return (
+				<FormSelectInput
+					name="category"
+					value={selectedCategory}
+					optionNames={cachedQuestionCategories.current.map(
+						(option) => option.name
+					)}
+					optionValues={cachedQuestionCategories.current.map(
+						(option) => option.value
+					)}
+					onChange={onChange}
+				>
+					Category
+				</FormSelectInput>
+			);
+		case STATUS.rejected:
+			return <Error>{error}</Error>;
+		default:
+			return <Error>Something went wrong with CategorySelector</Error>;
 	}
 }
 

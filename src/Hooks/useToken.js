@@ -1,3 +1,9 @@
+/**
+ * Hook based around useRef that stores a session token used by the OpenTriviaAPI.
+ * These tokens ensure that you don't get served the same question in a session.
+ * It is appended to the request for questions, see useQuiz and useFetchQuestions.
+ */
+
 // Library imports
 import { useRef } from "react";
 

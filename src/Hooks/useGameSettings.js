@@ -1,5 +1,7 @@
+// Library imports
 import { useState, useContext } from "react";
 
+// State imports
 import { globalState } from "./../App";
 
 function useGameSettings() {

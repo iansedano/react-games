@@ -1,4 +1,5 @@
 import Button from "../Components/Button";
+import Error from "../Components/Error";
 
 // {
 // 	category: "Entertainment: Film",
@@ -49,23 +50,36 @@ function Question({ question, answerCallback }) {
 		}
 	}
 
-	return (
-		<div className="question margin-m flex-col" onClick={handleClick}>
-			{!question ? (
-				<h3>End of Quiz!</h3>
-			) : question.type === "multiple" ? (
+	console.log(question);
+
+	let renderedQuestion;
+
+	// if (!question) return null;
+
+	switch (question.type) {
+		case "multiple":
+			renderedQuestion = (
 				<MultipleChoiceQuestion
 					question={question}
 					answerCallback={answerCallback}
 				/>
-			) : question.type === "boolean" ? (
+			);
+			break;
+		case "boolean":
+			renderedQuestion = (
 				<BooleanQuestion
 					question={question}
 					answerCallback={answerCallback}
 				/>
-			) : (
-				question
-			)}
+			);
+			break;
+		default:
+			renderedQuestion = <Error>Invalid question type</Error>;
+	}
+
+	return (
+		<div className="question margin-m flex-col" onClick={handleClick}>
+			{renderedQuestion}
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
-// https://avatars.dicebear.com/docs/http-api
-// `https://avatars.dicebear.com/api/bottts/${name}.svg`
+// Library imports
 import { useContext } from "react";
+
+// State imports
 import { globalState } from "./../App";
 
 function UserProfile() {
@@ -10,6 +11,7 @@ function UserProfile() {
 			<img
 				alt="user gravatar"
 				className="user-avatar"
+				// https://avatars.dicebear.com/docs/http-api
 				src={`https://avatars.dicebear.com/api/bottts/${state.userName}.svg`}
 			></img>
 			<h2>Welcome, {state.userName}!</h2>
