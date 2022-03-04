@@ -33,7 +33,7 @@ function useQuiz(difficulty, category, numberOfQuestions, sessionToken) {
 		}
 	}
 
-	// Answers as an array of the questions answered, 1 for correct, 0 for wrong.
+	// Answers as an array of the questions answered, 1 for correct, 0 for wrong
 	const [answers, setAnswers] = useState([]);
 
 	useEffect(() => {

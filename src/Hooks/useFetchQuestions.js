@@ -1,5 +1,5 @@
 // Library imports
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import he from "he";
 
 // Hook imports
@@ -48,22 +48,20 @@ function useFetchQuestions(
 
 	const { status, error, response } = useOpenTriviaApi(buildQueryString());
 
-	useEffect(() => {
-		if (status === STATUS.resolved) {
-			setQuestions(
-				response.results.map((question) => {
-					return {
-						...question,
-						question: he.decode(question.question),
-						correct_answer: he.decode(question.correct_answer),
-						incorrect_answers: question.incorrect_answers.map(
-							(answer) => he.decode(answer)
-						),
-					};
-				})
-			);
-		}
-	}, [status, response]);
+	if (status === STATUS.resolved && questions === null) {
+		const questions = response.results.map((question) => {
+			return {
+				...question,
+				question: he.decode(question.question),
+				correct_answer: he.decode(question.correct_answer),
+				incorrect_answers: question.incorrect_answers.map((answer) =>
+					he.decode(answer)
+				),
+			};
+		});
+		setQuestions(questions);
+		return { status, error, questions };
+	}
 
 	return { status, error, questions };
 }

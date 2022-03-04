@@ -15,8 +15,6 @@ function Game({ difficulty, category, numberOfQuestions, sessionToken }) {
 	const { status, quizFinished, currentQuestion, answerCallback, error } =
 		useQuiz(difficulty, category, numberOfQuestions, sessionToken);
 
-	console.log({ status, currentQuestion });
-
 	if (quizFinished) return <h3>End of Quiz!</h3>;
 
 	switch (status) {

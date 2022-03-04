@@ -50,11 +50,7 @@ function Question({ question, answerCallback }) {
 		}
 	}
 
-	console.log(question);
-
 	let renderedQuestion;
-
-	// if (!question) return null;
 
 	switch (question.type) {
 		case "multiple":

@@ -1,5 +1,5 @@
 // Library imports
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 
 export const STATUS = {
 	idle: "idle",
@@ -13,50 +13,82 @@ export const DEFAULT_FETCH_OPTIONS = {
 	cacheValue: null,
 };
 
-function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
-	const [response, setResponse] = useState(null);
-	const [error, setError] = useState(null);
-	const [status, setStatus] = useState(STATUS.idle);
+const FETCH_ACTIONS = {
+	START: "START_FETCH",
+	SUCCESS: "FETCH_SUCCESS",
+	FAIL: "FETCH_FAIL",
+};
 
-	if (options.abort === true && status !== STATUS.resolved) {
+function fetchReducer(state, action) {
+	switch (action.type) {
+		case FETCH_ACTIONS.START:
+			return { ...state, status: STATUS.fetching };
+		case FETCH_ACTIONS.SUCCESS:
+			return {
+				status: STATUS.resolved,
+				error: null,
+				response: action.payload,
+			};
+		case FETCH_ACTIONS.FAIL:
+			return {
+				status: STATUS.rejected,
+				error: action.payload,
+				response: null,
+			};
+		default:
+			console.error("Invalid fetch action");
+			return state;
+	}
+}
+
+function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
+	const [fetchState, dispatch] = useReducer(fetchReducer, {
+		status: STATUS.idle,
+		error: null,
+		response: null,
+	});
+
+	if (options.abort === true && fetchState.status !== STATUS.resolved) {
 		if (options.cacheValue) {
-			setResponse(options.cacheValue);
-			setStatus(STATUS.resolved);
+			dispatch({
+				type: FETCH_ACTIONS.SUCCESS,
+				payload: options.cacheValue,
+			});
 		}
 	}
 
 	useEffect(() => {
 		const request = async () => {
 			console.log("Fectching", url);
-
-			let response;
-
 			try {
-				response = await fetch(url);
+				const response = await fetch(url);
 
 				if (response.ok) {
-					setResponse(await response.json());
+					dispatch({
+						type: FETCH_ACTIONS.SUCCESS,
+						payload: await response.json(),
+					});
 				} else {
-					setError("Something went with the request.");
+					dispatch({
+						type: FETCH_ACTIONS.FAIL,
+						payload: `${response.status}, ${response.statusText}`,
+					});
 				}
 			} catch (e) {
-				setError(`Error message: ${e.message}`);
-			} finally {
-				if (response) {
-					setStatus(STATUS.resolved);
-				} else if (error) {
-					setStatus(STATUS.rejected);
-				}
+				dispatch({
+					type: FETCH_ACTIONS.FAIL,
+					payload: `Error message: ${e.message}`,
+				});
 			}
 		};
 
-		if (status === STATUS.idle) {
-			setStatus(STATUS.fetching);
+		if (fetchState.status === STATUS.idle) {
+			dispatch({ type: FETCH_ACTIONS.START });
 			request();
 		}
-	}, [url, response, error, status]);
+	}, [url, fetchState.status]);
 
-	return { status, error, response };
+	return fetchState;
 }
 
 export default useFetch;
