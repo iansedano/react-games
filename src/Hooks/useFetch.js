@@ -63,7 +63,6 @@ function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
 
 	useEffect(() => {
 		const request = async () => {
-			console.log("Fectching", url);
 			try {
 				const response = await fetch(url);
 

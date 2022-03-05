@@ -34,7 +34,6 @@ function App() {
 	const [globalState, globalDispatch] = useReducer(reducer, store);
 
 	useEffect(() => {
-		console.log("updating localstore");
 		setStore(globalState);
 	}, [globalState, setStore]);
 

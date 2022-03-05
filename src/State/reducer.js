@@ -23,6 +23,7 @@ function reducer(state, action) {
 			return {
 				...state,
 				quizAnswers: [],
+				quizTimesPlayed: 0,
 			};
 		case ACTIONS.QUIZ_INCREMENT_TIMES_PLAYED:
 			return { ...state, quizTimesPlayed: state.quizTimesPlayed + 1 };

@@ -50,7 +50,6 @@ const defaultQuizState = {
 };
 
 function quizReducer(state, action) {
-	console.log("ACTION!!", action);
 	switch (action.type) {
 		case QUIZ_ACTIONS.GIVE_ANSWER:
 			const questionRight =
@@ -99,7 +98,6 @@ function useQuiz(sessionToken) {
 
 	useEffect(() => {
 		if (quizState.status === QUIZ_STATUS.FINISHED) {
-			console.log("dispatching");
 			globalDispatch({
 				type: ACTIONS.QUIZ_ADD_ANSWERS,
 				payload: quizState.answers,
@@ -114,11 +112,7 @@ function useQuiz(sessionToken) {
 		}
 	}, [globalDispatch, quizState]);
 
-	console.log("============useQuiz================");
-	console.log({ status, questions });
-	console.log(quizState);
-
-	let renderComponent;
+	// FETCHING STATUS
 
 	if (quizState.questions === null) {
 		switch (status) {
@@ -143,19 +137,19 @@ function useQuiz(sessionToken) {
 					type: QUIZ_ACTIONS.CHANGE_STATUS,
 					payload: QUIZ_STATUS.FETCH_FAIL,
 				});
-				renderComponent = <Error>{error}</Error>;
 				break;
 			default:
 		}
 	}
 
+	// QUIZ STATUS
+
 	switch (quizState.status) {
 		case QUIZ_STATUS.IDLE:
 		case QUIZ_STATUS.FETCHING:
-			renderComponent = <BounceLoader />;
-			break;
+			return <BounceLoader />;
 		case QUIZ_STATUS.AWAITING_ANSWER:
-			renderComponent = (
+			return (
 				<Question
 					question={quizState.questions[quizState.questionIndex]}
 					answerCallback={(answer) => {
@@ -166,9 +160,8 @@ function useQuiz(sessionToken) {
 					}}
 				/>
 			);
-			break;
 		case QUIZ_STATUS.GIVING_FEEDBACK:
-			renderComponent = (
+			return (
 				<>
 					<Question
 						question={quizState.questions[quizState.questionIndex]}
@@ -186,19 +179,16 @@ function useQuiz(sessionToken) {
 					/>
 				</>
 			);
-			break;
 		case QUIZ_STATUS.FINISHED:
 			// The useEffect callback defined above comes into play here
-			renderComponent = <BounceLoader />;
-			break;
+			return <BounceLoader />;
 		case QUIZ_STATUS.FINISHED_AND_DISPATCHED:
-			renderComponent = <h3>End of quiz!</h3>;
-			break;
+			return <h3>End of quiz!</h3>;
+		case QUIZ_STATUS.FETCH_FAIL:
+			return <Error>{error}</Error>;
 		default:
-			renderComponent = <Error>Something went wrong with Game</Error>;
+			return <Error>Something went wrong with Game</Error>;
 	}
-
-	return renderComponent;
 }
 
 export default useQuiz;
