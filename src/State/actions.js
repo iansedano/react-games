@@ -1,3 +1,8 @@
+/**
+ * Main reducer action enum
+ * All actions implemented in the reducer should be identified from this object
+ */
+
 const ACTIONS = {
 	TOGGLE_DARK_MODE: "TOGGLE_DARK_MODE",
 	CHANGE_PAGE: "CHANGE_PAGE",

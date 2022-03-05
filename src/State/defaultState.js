@@ -1,3 +1,7 @@
+/**
+ * Default globalState
+ */
+
 import PAGES from "./PAGES";
 
 const DEFAULT_STATE = {

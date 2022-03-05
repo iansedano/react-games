@@ -1,5 +1,5 @@
 function FormSelectInput({
-	name,
+	id,
 	optionNames,
 	optionValues,
 	value,
@@ -8,18 +8,18 @@ function FormSelectInput({
 }) {
 	return (
 		<div className="form-input-container flex-center">
-			<label htmlFor={name} className="form-input-label">
+			<label htmlFor={id} className="form-input-label">
 				{children}
 			</label>
 			<select
-				id={name}
+				id={id}
 				value={value || ""}
 				onChange={onChange}
 				className="form-input"
 			>
 				{optionNames.map((optionName, i) => (
 					<option
-						key={`${name}-${optionName}`}
+						key={`${id}-${optionName}`}
 						value={optionValues ? optionValues[i] : optionName}
 						label={optionName}
 					/>

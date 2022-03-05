@@ -10,6 +10,9 @@ import reducer from "./State/reducer";
 import DEFAULT_STATE from "./State/defaultState";
 import PAGES from "./State/PAGES";
 
+// Hook imports
+import useLocalStorage from "./Hooks/useLocalStorage";
+
 // Page imports
 import Home from "./Home/Home";
 import TimesTableGame from "./TimesTableGame/TimesTableGame";
@@ -27,13 +30,12 @@ export const globalState = createContext();
 const localStorageKey = "USER_DATA";
 
 function App() {
-	const [state, dispatch] = useReducer(reducer, DEFAULT_STATE, (init) => {
-		return JSON.parse(localStorage.getItem(localStorageKey)) || init;
-	});
+	const [store, setStore] = useLocalStorage(localStorageKey, DEFAULT_STATE);
+	const [state, dispatch] = useReducer(reducer, store);
 
 	useEffect(() => {
-		localStorage.setItem(localStorageKey, JSON.stringify(state));
-	}, [state]);
+		setStore(state);
+	}, [state, setStore]);
 
 	useEffect(() => {
 		if (state.darkMode) {

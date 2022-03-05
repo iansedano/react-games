@@ -1,3 +1,7 @@
+/**
+ * General purpose fetching hook
+ */
+
 // Library imports
 import { useEffect, useReducer } from "react";
 

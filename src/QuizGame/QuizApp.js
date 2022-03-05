@@ -1,3 +1,8 @@
+/**
+ * Parent component of the Quiz game, providing some state that should stay
+ * live throughout it's lifetime, categories and the session token.
+ */
+
 // CSS
 import "./QuizApp.css";
 
@@ -12,7 +17,7 @@ import Quiz from "./Quiz";
 function QuizApp() {
 	console.log("QuizApp render");
 	// Hooks
-	const cachedQuestionCategories = useRef();
+	const questionCategoryRef = useRef(); // To cache the value
 	const sessionToken = useToken();
 
 	const classNames = [
@@ -26,7 +31,7 @@ function QuizApp() {
 	return (
 		<div className={classNames.join(" ")}>
 			<Quiz
-				cachedQuestionCategories={cachedQuestionCategories}
+				questionCategoryRef={questionCategoryRef}
 				sessionToken={sessionToken}
 			/>
 		</div>

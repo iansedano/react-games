@@ -1,3 +1,7 @@
+/**
+ * Main reducer passed to the global context provider
+ */
+
 import ACTIONS from "./ACTIONS";
 import PAGES from "./PAGES";
 

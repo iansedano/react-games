@@ -11,7 +11,7 @@ import useGameSettings from "../Hooks/useGameSettings";
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({ setIsPlaying, cachedQuestionCategories }) {
+function Settings({ setIsPlaying, questionCategoryRef }) {
 	const [settings, setSettings, saveSettings] = useGameSettings();
 
 	const submitHandler = (e) => {
@@ -30,7 +30,7 @@ function Settings({ setIsPlaying, cachedQuestionCategories }) {
 			onSubmit={submitHandler}
 		>
 			<FormTextInput
-				name="numberOfQuestions"
+				id="numberOfQuestions"
 				value={settings.numberOfQuestions}
 				onChange={changeHandler}
 			>
@@ -42,7 +42,7 @@ function Settings({ setIsPlaying, cachedQuestionCategories }) {
 			/>
 			<CategorySelector
 				selectedCategory={settings.category}
-				cachedQuestionCategories={cachedQuestionCategories}
+				questionCategoryRef={questionCategoryRef}
 				onChange={changeHandler}
 			/>
 			<Button type="submit" className="margin-m">

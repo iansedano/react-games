@@ -1,18 +1,25 @@
+/**
+ * Parent question component that takes a question in this form:
+ *
+ * {
+ * 		category: "Entertainment: Film",
+ * 		type: "multiple",
+ * 		difficulty: "medium",
+ * 		question:
+ *  "What was Marilyn Monroe`s character&#039;s first name in the
+ *   film &quot;Some Like It Hot&quot;?",
+ * 		correct_answer: "Sugar",
+ * 		incorrect_answers: ["Honey", "Caramel", "Candy"]
+ * }
+ *
+ * And renders the appropriate question, of which there are two types:
+ * 		- Multiple Choice
+ * 		- True or False (Boolean)
+ */
+
+// Component imports
 import Button from "../Components/Button";
 import Error from "../Components/Error";
-
-// {
-// 	category: "Entertainment: Film",
-// 	type: "multiple",
-// 	difficulty: "medium",
-// 	question: "What was Marilyn Monroe`s character&#039;s first name in the film &quot;Some Like It Hot&quot;?",
-// 	correct_answer: "Sugar",
-// 	incorrect_answers: [
-// 		"Honey",
-// 		"Caramel",
-// 		"Candy"
-// 	]
-// }
 
 function MultipleChoiceQuestion({ question }) {
 	const randomIndex = Math.floor(Math.random() * 4);

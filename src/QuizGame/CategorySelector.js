@@ -9,12 +9,8 @@ import FormSelectInput from "../Components/FormSelectInput";
 import { STATUS } from "../Hooks/useFetch";
 import useCategoryOptions from "../Hooks/useCategoryOptions";
 
-function CategorySelector({
-	selectedCategory,
-	onChange,
-	cachedQuestionCategories,
-}) {
-	const { status, error } = useCategoryOptions(cachedQuestionCategories);
+function CategorySelector({ selectedCategory, onChange, questionCategoryRef }) {
+	const { status, error } = useCategoryOptions(questionCategoryRef);
 
 	switch (status) {
 		case STATUS.idle:
@@ -23,12 +19,12 @@ function CategorySelector({
 		case STATUS.resolved:
 			return (
 				<FormSelectInput
-					name="category"
+					id="category"
 					value={selectedCategory}
-					optionNames={cachedQuestionCategories.current.map(
+					optionNames={questionCategoryRef.current.map(
 						(option) => option.name
 					)}
-					optionValues={cachedQuestionCategories.current.map(
+					optionValues={questionCategoryRef.current.map(
 						(option) => option.value
 					)}
 					onChange={onChange}

@@ -1,3 +1,10 @@
+/**
+ * Main page and main child of the Quiz app
+ *
+ * Manages the isPlaying state which determines whether the game is being played
+ * or configured.
+ */
+
 // Library imports
 import { useState } from "react";
 
@@ -9,7 +16,7 @@ import Settings from "./Settings";
 import Stats from "./Stats";
 import Game from "./Game";
 
-function Quiz({ cachedQuestionCategories, sessionToken }) {
+function Quiz({ questionCategoryRef, sessionToken }) {
 	const [isPlaying, setIsPlaying] = useState(false);
 
 	if (isPlaying) {
@@ -26,7 +33,7 @@ function Quiz({ cachedQuestionCategories, sessionToken }) {
 			<>
 				<Settings
 					setIsPlaying={setIsPlaying}
-					cachedQuestionCategories={cachedQuestionCategories}
+					questionCategoryRef={questionCategoryRef}
 				/>
 				<Stats />
 			</>

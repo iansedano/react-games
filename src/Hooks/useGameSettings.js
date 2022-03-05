@@ -1,3 +1,12 @@
+/**
+ * Hook that provides a wrapper around the game settings for the form component
+ * It first pulls the value from the context, and then provides the settings
+ * in a simplified object for the form, and also an updater function to control
+ * the form. Finally, it provides a saveSettings function, that will dispatch
+ * the updates to the globalState, saving the settings for the next time the
+ * component is loaded.
+ */
+
 // Library imports
 import { useContext, useState } from "react";
 

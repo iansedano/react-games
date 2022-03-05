@@ -10,7 +10,7 @@ function DifficultySelector({ selectedDifficulty, onChange }) {
 
 	return (
 		<FormSelectInput
-			name="difficulty"
+			id="difficulty"
 			value={selectedDifficulty}
 			optionNames={difficultyOptions.map((option) => option.name)}
 			optionValues={difficultyOptions.map((option) => option.value)}
