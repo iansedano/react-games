@@ -25,27 +25,28 @@ import HeaderBar from "./HeaderBar";
 import "./App.css";
 import "./Utility.css";
 
-export const globalState = createContext();
+export const globalContext = createContext();
 
 const localStorageKey = "USER_DATA";
 
 function App() {
 	const [store, setStore] = useLocalStorage(localStorageKey, DEFAULT_STATE);
-	const [state, dispatch] = useReducer(reducer, store);
+	const [globalState, globalDispatch] = useReducer(reducer, store);
 
 	useEffect(() => {
-		setStore(state);
-	}, [state, setStore]);
+		console.log("updating localstore");
+		setStore(globalState);
+	}, [globalState, setStore]);
 
 	useEffect(() => {
-		if (state.darkMode) {
+		if (globalState.darkMode) {
 			document.body.classList.add("dark-mode");
 		} else document.body.classList.remove("dark-mode");
-	}, [state.darkMode]);
+	}, [globalState.darkMode]);
 
 	let page;
 
-	switch (state.page) {
+	switch (globalState.page) {
 		case PAGES.HOME:
 			page = <Home />;
 			break;
@@ -64,16 +65,16 @@ function App() {
 	}
 
 	return (
-		<globalState.Provider value={{ state, dispatch }}>
+		<globalContext.Provider value={{ globalState, globalDispatch }}>
 			<main className="flex-col full-width">
 				<HeaderBar />
 				{page}
-				{state.page !== "home" ? ( // if page not home then no need for button
+				{globalState.page !== "home" ? ( // if page not home then no need for button
 					<PageNavButton page={PAGES.HOME}>Home</PageNavButton>
 				) : null}
 				<HeaderBar />
 			</main>
-		</globalState.Provider>
+		</globalContext.Provider>
 	);
 }
 

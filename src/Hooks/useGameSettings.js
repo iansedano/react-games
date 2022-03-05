@@ -11,16 +11,16 @@
 import { useContext, useState } from "react";
 
 // State imports
-import { globalState } from "./../App";
+import { globalContext } from "./../App";
 import ACTIONS from "./../State/ACTIONS";
 
 function useGameSettings() {
-	const { state, dispatch } = useContext(globalState);
+	const { globalState, globalDispatch } = useContext(globalContext);
 
 	const [settings, setSettings] = useState({
-		numberOfQuestions: state.quizNumberOfQuestionsSet,
-		difficulty: state.quizDifficultySet,
-		category: state.quizCategorySet,
+		numberOfQuestions: globalState.quizNumberOfQuestionsSet,
+		difficulty: globalState.quizDifficultySet,
+		category: globalState.quizCategorySet,
 	});
 
 	const setSettingsWrapper = (key, value) => {
@@ -33,7 +33,10 @@ function useGameSettings() {
 	};
 
 	const saveSettings = () =>
-		dispatch({ type: ACTIONS.QUIZ_UPDATE_SETTINGS, payload: settings });
+		globalDispatch({
+			type: ACTIONS.QUIZ_UPDATE_SETTINGS,
+			payload: settings,
+		});
 
 	return [settings, setSettingsWrapper, saveSettings];
 }

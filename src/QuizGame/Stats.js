@@ -10,15 +10,17 @@ import { useContext } from "react";
 import Button from "../Components/Button";
 
 // State imports
-import { globalState } from "../App";
+import { globalContext } from "../App";
 import ACTIONS from "../State/ACTIONS";
 
 function Stats() {
-	const { state, dispatch } = useContext(globalState);
-	if (state.quizAnswers.length) {
-		const countRight = state.quizAnswers.filter((a) => a === 1).length;
+	const { globalState, globalDispatch } = useContext(globalContext);
+	if (globalState.quizAnswers.length) {
+		const countRight = globalState.quizAnswers.filter(
+			(a) => a === 1
+		).length;
 		const percentRight = `${(
-			(countRight / state.quizAnswers.length) *
+			(countRight / globalState.quizAnswers.length) *
 			100
 		).toFixed(2)}%`;
 
@@ -27,7 +29,7 @@ function Stats() {
 				<h3>{`You answer correctly ${percentRight} of the time`}</h3>
 				<Button
 					onClick={() => {
-						dispatch({
+						globalDispatch({
 							type: ACTIONS.QUIZ_RESET_ANSWERS,
 						});
 					}}

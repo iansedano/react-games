@@ -5,17 +5,17 @@ import { useContext } from "react";
 import Button from "./Button";
 
 // State imports
-import { globalState } from "./../App";
+import { globalContext } from "./../App";
 import ACTIONS from "./../State/ACTIONS";
 import PAGES from "./../State/PAGES";
 
 function PageNavButton({ page, children }) {
-	const { dispatch } = useContext(globalState);
+	const { globalDispatch } = useContext(globalContext);
 
 	return (
 		<Button
 			onClick={() => {
-				dispatch({
+				globalDispatch({
 					type: ACTIONS.CHANGE_PAGE,
 					payload: PAGES[page],
 				});

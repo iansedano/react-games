@@ -29,10 +29,10 @@ import { STATUS } from "./useFetch";
 import useOpenTriviaApi from "./useOpenTriviaApi";
 
 // State imports
-import { globalState } from "./../App";
+import { globalContext } from "./../App";
 
 function useFetchQuestions(sessionToken) {
-	const { state } = useContext(globalState);
+	const { globalState } = useContext(globalContext);
 	const [questions, setQuestions] = useState(null);
 
 	// Build query string based on parameters
@@ -40,9 +40,9 @@ function useFetchQuestions(sessionToken) {
 		const root = "api.php?";
 
 		const params = {
-			amount: state.quizNumberOfQuestionsSet,
-			difficulty: state.quizDifficultySet,
-			category: state.quizCategorySet,
+			amount: globalState.quizNumberOfQuestionsSet,
+			difficulty: globalState.quizDifficultySet,
+			category: globalState.quizCategorySet,
 			token: sessionToken,
 		};
 

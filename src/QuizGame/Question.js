@@ -18,39 +18,13 @@
  */
 
 // Component imports
-import Button from "../Components/Button";
 import Error from "../Components/Error";
 
-function MultipleChoiceQuestion({ question }) {
-	const randomIndex = Math.floor(Math.random() * 4);
-	let answerList = [...question.incorrect_answers]; // doing this on same line as below does not work because splice returns removed items.
-	answerList.splice(randomIndex, 0, question.correct_answer);
+// Project imports
+import MultipleChoiceQuestion from "./MultipleChoiceQuestion";
+import BooleanQuestion from "./BooleanQuestion";
 
-	return (
-		<>
-			<h3 className="bg-1 border-rad padding-s">{question.question}</h3>
-			<div className="flex-row">
-				{answerList.map((a) => {
-					return <Button key={a}>{a}</Button>;
-				})}
-			</div>
-		</>
-	);
-}
-
-function BooleanQuestion({ question }) {
-	return (
-		<>
-			<h3 className="bg-1 border-rad padding-s">{question.question}</h3>
-			<div className="flex-row">
-				<Button>true</Button>
-				<Button>false</Button>
-			</div>
-		</>
-	);
-}
-
-function Question({ question, answerCallback }) {
+function Question({ question, answerCallback, disabled }) {
 	function handleClick(e) {
 		if (e.target.tagName === "BUTTON") {
 			answerCallback(e.target.innerText);
@@ -64,16 +38,13 @@ function Question({ question, answerCallback }) {
 			renderedQuestion = (
 				<MultipleChoiceQuestion
 					question={question}
-					answerCallback={answerCallback}
+					disabled={disabled}
 				/>
 			);
 			break;
 		case "boolean":
 			renderedQuestion = (
-				<BooleanQuestion
-					question={question}
-					answerCallback={answerCallback}
-				/>
+				<BooleanQuestion question={question} disabled={disabled} />
 			);
 			break;
 		default:
