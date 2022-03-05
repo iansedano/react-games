@@ -13,7 +13,7 @@ function FormSelectInput({
 			</label>
 			<select
 				id={name}
-				value={value != null ? value : null}
+				value={value || ""}
 				onChange={onChange}
 				className="form-input"
 			>

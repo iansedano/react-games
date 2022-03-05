@@ -1,29 +1,22 @@
-import { useContext } from "react";
-
+// Component imports
 import Button from "../Components/Button";
 import FormTextInput from "../Components/FormTextInput";
-
-import { globalState } from "./../App";
-import ACTIONS from "./../State/ACTIONS";
-
 import CategorySelector from "./CategorySelector";
 import DifficultySelector from "./DifficultySelector";
+
+// Hook imports
+import useGameSettings from "../Hooks/useGameSettings";
 
 // https://reactjs.org/docs/forms.html
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({
-	settings,
-	setSettings,
-	setIsPlaying,
-	cachedQuestionCategories,
-}) {
-	const { dispatch } = useContext(globalState);
+function Settings({ setIsPlaying, cachedQuestionCategories }) {
+	const [settings, setSettings, saveSettings] = useGameSettings();
 
 	const submitHandler = (e) => {
 		e.preventDefault();
-		dispatch({ type: ACTIONS.QUIZ_UPDATE_SETTINGS, payload: settings });
+		saveSettings();
 		setIsPlaying((p) => !p);
 	};
 

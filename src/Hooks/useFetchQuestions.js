@@ -1,10 +1,13 @@
 // Library imports
-import { useState } from "react";
+import { useContext, useState } from "react";
 import he from "he";
 
 // Hook imports
 import { STATUS } from "./useFetch";
 import useOpenTriviaApi from "./useOpenTriviaApi";
+
+// State imports
+import { globalState } from "./../App";
 
 /*
 
@@ -26,24 +29,30 @@ Hence need for 'he'
 
 */
 
-function useFetchQuestions(
-	difficulty,
-	category,
-	numberOfQuestions,
-	sessionToken
-) {
+function useFetchQuestions(sessionToken) {
+	const { state } = useContext(globalState);
 	const [questions, setQuestions] = useState(null);
 
 	// Build query string based on parameters
 	const buildQueryString = () => {
 		const root = "api.php?";
-		const params = [
-			difficulty ? `difficulty=${difficulty}` : "",
-			category ? `category=${category}` : "",
-			numberOfQuestions ? `amount=${numberOfQuestions}` : "",
-			sessionToken ? `token=${sessionToken}` : "",
-		];
-		return root + params.filter((p) => p !== "").join("&");
+
+		const params = {
+			amount: state.quizNumberOfQuestionsSet,
+			difficulty: state.quizDifficultySet,
+			category: state.quizCategorySet,
+			token: sessionToken,
+		};
+
+		const queryString = Object.entries(params)
+			.filter(([key, value]) => Boolean(value))
+			.reduce((arr, [key, value]) => {
+				arr.push(`${key}=${value}`);
+				return arr;
+			}, [])
+			.join("&");
+
+		return root + queryString;
 	};
 
 	const { status, error, response } = useOpenTriviaApi(buildQueryString());

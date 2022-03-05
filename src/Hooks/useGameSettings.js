@@ -1,11 +1,12 @@
 // Library imports
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
 
 // State imports
 import { globalState } from "./../App";
+import ACTIONS from "./../State/ACTIONS";
 
 function useGameSettings() {
-	const { state } = useContext(globalState);
+	const { state, dispatch } = useContext(globalState);
 
 	const [settings, setSettings] = useState({
 		numberOfQuestions: state.quizNumberOfQuestionsSet,
@@ -14,15 +15,18 @@ function useGameSettings() {
 	});
 
 	const setSettingsWrapper = (key, value) => {
-		const newState = { ...state };
+		const newSettings = { ...settings };
 		if (value === "Any") {
-			newState[key] = "";
-		} else newState[key] = value;
+			newSettings[key] = "";
+		} else newSettings[key] = value;
 
-		setSettings(newState);
+		setSettings(newSettings);
 	};
 
-	return [settings, setSettingsWrapper];
+	const saveSettings = () =>
+		dispatch({ type: ACTIONS.QUIZ_UPDATE_SETTINGS, payload: settings });
+
+	return [settings, setSettingsWrapper, saveSettings];
 }
 
 export default useGameSettings;

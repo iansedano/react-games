@@ -4,40 +4,27 @@ import { useState } from "react";
 // Component imports
 import Button from "../Components/Button";
 
-// Hook imports
-import useGameSettings from "../Hooks/useGameSettings";
-
 // General Knowledge Game imports
 import Settings from "./Settings";
 import Stats from "./Stats";
 import Game from "./Game";
 
 function Quiz({ cachedQuestionCategories, sessionToken }) {
-	const [settings, setSettings] = useGameSettings();
 	const [isPlaying, setIsPlaying] = useState(false);
 
-	let render;
-
 	if (isPlaying) {
-		render = (
+		return (
 			<>
-				<Game
-					difficulty={settings.difficulty}
-					category={settings.category}
-					numberOfQuestions={settings.numberOfQuestions}
-					sessionToken={sessionToken}
-				/>
+				<Game sessionToken={sessionToken} />
 				<Button onClick={() => setIsPlaying((p) => !p)}>
 					Quit Game
 				</Button>
 			</>
 		);
 	} else {
-		render = (
+		return (
 			<>
 				<Settings
-					settings={settings}
-					setSettings={setSettings}
 					setIsPlaying={setIsPlaying}
 					cachedQuestionCategories={cachedQuestionCategories}
 				/>
@@ -45,8 +32,6 @@ function Quiz({ cachedQuestionCategories, sessionToken }) {
 			</>
 		);
 	}
-
-	return render;
 }
 
 export default Quiz;

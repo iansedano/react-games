@@ -11,9 +11,9 @@ import useQuiz from "../Hooks/useQuiz";
 // Local imports
 import Question from "./Question";
 
-function Game({ difficulty, category, numberOfQuestions, sessionToken }) {
+function Game({ sessionToken }) {
 	const { status, quizFinished, currentQuestion, answerCallback, error } =
-		useQuiz(difficulty, category, numberOfQuestions, sessionToken);
+		useQuiz(sessionToken);
 
 	if (quizFinished) return <h3>End of Quiz!</h3>;
 
