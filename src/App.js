@@ -46,10 +46,20 @@ function App() {
 		return JSON.parse(localStorage.getItem(localStorageKey)) || init;
 	});
 
+	// Do we really want to update local store EVERY time state changes? this is not good for performance. 
+	// How about if we just do it at the beginning and end of the lifecycle? 
+	// useEffect(() => {
+	// 	localStorage.setItem(localStorageKey, JSON.stringify(state));
+	// 	return () => {localStorage.setItem(localStorageKey, JSON.stringify(state));}
+	// }, []);
+	// or maybe just at the end? [remove the first call to localStorage]
+
 	useEffect(() => {
 		localStorage.setItem(localStorageKey, JSON.stringify(state));
 	}, [state]);
 
+
+	// this is running on every render. it should only run when darkMode changes
 	useEffect(() => {
 		if (state.siteSettings.darkMode) {
 			document.body.classList.add("dark-mode");
@@ -57,7 +67,12 @@ function App() {
 	});
 
 	let page;
-
+	/*
+	*  We don't have a real routing solution. For that reason, I think this switch statement is a solid idea.
+	*  My main concern is relying on "random" strings like "timesTableGame" and "generalKnowledgeGame".
+	*  How about if we extract them into a central location that serves as a single source of truth?
+	*  ie: const ROUTER = {HOME: 'home', CONNECT_FOUR: 'connectFour' ....}
+	*/
 	switch (state.siteSettings.page) {
 		case "home":
 			page = <Home />;
@@ -76,10 +91,23 @@ function App() {
 	}
 
 	return (
+		/*
+		* This is a great demonstration of how powerful context can be. However,
+		* having ONE big(and global) context can hurt performance(if you are not careful). Why?
+		* Each time your state changes, your entire application will re-render 
+		* since all the components depend on the global state. There are two easy solutions:
+		* 1 - React for a state management library [redux, recoil...]
+		* 2- Split your state into multiple context providers.
+		* 3- Optimize your context
+		* I think the solutions should be outside the scope of the course[that's up to you tho] 
+		* but it might be nice to mention that this is not a good approach for large applications.
+		* more: https://kentcdodds.com/blog/how-to-optimize-your-context-value
+		*/
 		<globalState.Provider value={{ state, dispatch }}>
 			<main className="flex-col full-width">
 				<HeaderBar />
 				{page}
+				{/* is there any reason the PageNavButton can't be inside the homepage component? */}
 				{state.siteSettings.page !== "home" ? (
 					<PageNavButton page="home">Home</PageNavButton>
 				) : null}
