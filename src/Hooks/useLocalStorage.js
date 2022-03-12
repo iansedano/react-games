@@ -8,7 +8,6 @@ function getStoredValue(key, defaultValue = null) {
 
 function useLocalStorage(key, defaultValue) {
 	const [state, setState] = useState(getStoredValue(key, defaultValue));
-
 	useEffect(() => {
 		localStorage.setItem(key, JSON.stringify(state));
 	}, [key, state]);

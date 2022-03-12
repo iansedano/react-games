@@ -1,42 +1,8 @@
-.btn {
+button {
 	border-radius: 12px;
 	font-family: inherit;
 	margin: 10px;
-}
-
-.img {
-	border-radius: 12px;
-	height: 4em;
-	width: 4em;
-	margin: 10px;
-	background-color: #ffffff;
-}
-
-/* Adapted from https://www.w3schools.com/css/css_tooltip.asp */
-
-.tooltip {
-	font-family: inherit;
-	position: relative;
-	display: inline-block;
-}
-
-.tooltip .tooltiptext {
-	visibility: hidden;
-	width: 120px;
-	background-color: #2e2e2e;
-	color: #d6d6d6;
-	text-align: center;
-	padding: 5px 0;
-	border-radius: 6px;
-	position: absolute;
-	z-index: 1;
-
-	width: 120px;
-	bottom: 35%;
-	left: 50%;
-	margin-left: -60px;
-}
-
-.tooltip:hover .tooltiptext {
-	visibility: visible;
+	font-size: 1.2rem;
+	font-weight: 600;
+	padding: 0.6rem;
 }

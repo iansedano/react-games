@@ -1,7 +1,13 @@
-import { useState, useEffect } from "react";
+/**
+ * General purpose fetching hook
+ */
+
+// Library imports
+import { useEffect, useReducer } from "react";
 
 export const STATUS = {
-	pending: "pending",
+	idle: "idle",
+	fetching: "fetching",
 	resolved: "resolved",
 	rejected: "rejected",
 };
@@ -11,43 +17,81 @@ export const DEFAULT_FETCH_OPTIONS = {
 	cacheValue: null,
 };
 
+const FETCH_ACTIONS = {
+	START: "START_FETCH",
+	SUCCESS: "FETCH_SUCCESS",
+	FAIL: "FETCH_FAIL",
+};
+
+function fetchReducer(state, action) {
+	switch (action.type) {
+		case FETCH_ACTIONS.START:
+			return { ...state, status: STATUS.fetching };
+		case FETCH_ACTIONS.SUCCESS:
+			return {
+				status: STATUS.resolved,
+				error: null,
+				response: action.payload,
+			};
+		case FETCH_ACTIONS.FAIL:
+			return {
+				status: STATUS.rejected,
+				error: action.payload,
+				response: null,
+			};
+		default:
+			console.error("Invalid fetch action");
+			return state;
+	}
+}
+
 function useFetch(url, options = DEFAULT_FETCH_OPTIONS) {
-	const [response, setResponse] = useState(null);
-	const [error, setError] = useState(null);
-	const [status, setStatus] = useState(STATUS.pending);
+	const [fetchState, dispatch] = useReducer(fetchReducer, {
+		status: STATUS.idle,
+		error: null,
+		response: null,
+	});
+
+	if (options.abort === true && fetchState.status !== STATUS.resolved) {
+		if (options.cacheValue) {
+			dispatch({
+				type: FETCH_ACTIONS.SUCCESS,
+				payload: options.cacheValue,
+			});
+		}
+	}
 
 	useEffect(() => {
-		if (options.abort !== true) {
-			(async () => {
-				if (status === STATUS.pending) {
-					try {
-						const response = await fetch(url);
-						if (response.ok) {
-							// TODO - some way to accept different data types?
-							setResponse(await response.json());
-						} else {
-							setError("Something went with the request.");
-						}
-					} catch (e) {
-						setError(`Error message: ${e.message}`);
-					} finally {
-						if (response) {
-							setStatus(STATUS.resolved);
-						} else if (error) {
-							setStatus(STATUS.rejected);
-						}
-					}
-				}
-			})();
-		} else if (options.abort === true) {
-			if (options.cacheValue) {
-				setResponse(options.cacheValue);
-			}
-			setStatus(STATUS.resolved);
-		}
-	}, [url, options.abort, options.cacheValue, response, error]);
+		const request = async () => {
+			try {
+				const response = await fetch(url);
 
-	return { status, error, response };
+				if (response.ok) {
+					dispatch({
+						type: FETCH_ACTIONS.SUCCESS,
+						payload: await response.json(),
+					});
+				} else {
+					dispatch({
+						type: FETCH_ACTIONS.FAIL,
+						payload: `${response.status}, ${response.statusText}`,
+					});
+				}
+			} catch (e) {
+				dispatch({
+					type: FETCH_ACTIONS.FAIL,
+					payload: `Error message: ${e.message}`,
+				});
+			}
+		};
+
+		if (fetchState.status === STATUS.idle) {
+			dispatch({ type: FETCH_ACTIONS.START });
+			request();
+		}
+	}, [url, fetchState.status]);
+
+	return fetchState;
 }
 
 export default useFetch;

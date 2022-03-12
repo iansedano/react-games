@@ -1,10 +1,15 @@
+// Library imports
 import { useContext } from "react";
 
-import { globalState } from "./App";
+// Component imports
 import Toggle from "./Components/Toggle";
 
+// State imports
+import ACTIONS from "./State/ACTIONS";
+import { globalContext } from "./App";
+
 function HeaderBar() {
-	const { state, dispatch } = useContext(globalState);
+	const { globalState, globalDispatch } = useContext(globalContext);
 	return (
 		<div className="bg-2 flex-row border-rad full-width">
 			<h3>Games</h3>
@@ -12,9 +17,9 @@ function HeaderBar() {
 				<p>Toggle Dark Mode</p>
 				<Toggle
 					onChange={() => {
-						dispatch({ type: "siteSettings/toggleDarkMode" });
+						globalDispatch({ type: ACTIONS.TOGGLE_DARK_MODE });
 					}}
-					checked={state.siteSettings.darkMode}
+					checked={globalState.darkMode}
 				/>
 			</div>
 		</div>

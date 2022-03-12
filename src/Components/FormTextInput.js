@@ -1,12 +1,12 @@
-function FormTextInput({ name, children, value, onChange }) {
+function FormTextInput({ id, children, value, onChange }) {
 	return (
 		<div className="form-input-container flex-center">
-			<label htmlFor={name} className="form-input-label">
+			<label htmlFor={id} className="form-input-label">
 				{children}
 			</label>
 			<input
 				type="text"
-				id={name}
+				id={id}
 				value={value}
 				onChange={onChange}
 				className="form-input"
