@@ -15,7 +15,6 @@ import useToken from "../Hooks/useToken";
 import Quiz from "./Quiz";
 
 function QuizApp() {
-	console.log("QuizApp render");
 	// Hooks
 	const questionCategoryRef = useRef(); // To cache the value
 	const sessionToken = useToken();
