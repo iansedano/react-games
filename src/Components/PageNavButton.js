@@ -1,17 +1,23 @@
+// Library imports
 import { useContext } from "react";
+
+// Component imports
 import Button from "./Button";
 
-import { globalState } from "./../App";
+// State imports
+import { globalContext } from "./../App";
+import ACTIONS from "./../State/ACTIONS";
+import PAGES from "./../State/PAGES";
 
-function PageNavButton({ src, page, children }) {
-	const { dispatch } = useContext(globalState);
+function PageNavButton({ page, children }) {
+	const { globalDispatch } = useContext(globalContext);
 
 	return (
 		<Button
-			src={src}
 			onClick={() => {
-				dispatch({
-					type: `siteSettings/changePage/${page}`,
+				globalDispatch({
+					type: ACTIONS.CHANGE_PAGE,
+					payload: PAGES[page],
 				});
 			}}
 		>

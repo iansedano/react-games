@@ -1,27 +1,27 @@
+// Component imports
+import Button from "../Components/Button";
+import FormTextInput from "../Components/FormTextInput";
 import CategorySelector from "./CategorySelector";
 import DifficultySelector from "./DifficultySelector";
 
-import Button from "./../../Components/Button";
-import FormTextInput from "./../../Components/FormTextInput";
+// Hook imports
+import useGameSettings from "../Hooks/useGameSettings";
 
 // https://reactjs.org/docs/forms.html
 // https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/
 // https://reactjs.org/docs/refs-and-the-dom.html
 
-function Settings({
-	formState,
-	setFormState,
-	saveSettings,
-	setIsPlaying,
-	cachedQuestionCategories,
-}) {
+function Settings({ setIsPlaying, questionCategoryRef }) {
+	const [settings, setSettings, saveSettings] = useGameSettings();
+
 	const submitHandler = (e) => {
 		e.preventDefault();
-		if (saveSettings()) setIsPlaying((p) => !p);
+		saveSettings();
+		setIsPlaying((p) => !p);
 	};
 
 	const changeHandler = (e) => {
-		setFormState(e.target.id, e.target.value);
+		setSettings(e.target.id, e.target.value);
 	};
 
 	return (
@@ -30,19 +30,19 @@ function Settings({
 			onSubmit={submitHandler}
 		>
 			<FormTextInput
-				name="numberOfQuestions"
-				value={formState.numberOfQuestions}
+				id="numberOfQuestions"
+				value={settings.numberOfQuestions}
 				onChange={changeHandler}
 			>
 				Number of Questions
 			</FormTextInput>
 			<DifficultySelector
-				selectedDifficulty={formState.difficulty}
+				selectedDifficulty={settings.difficulty}
 				onChange={changeHandler}
 			/>
 			<CategorySelector
-				selectedCategory={formState.category}
-				cachedQuestionCategories={cachedQuestionCategories}
+				selectedCategory={settings.category}
+				questionCategoryRef={questionCategoryRef}
 				onChange={changeHandler}
 			/>
 			<Button type="submit" className="margin-m">

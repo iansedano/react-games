@@ -1,6 +1,7 @@
-import useFetch, { STATUS, DEFAULT_FETCH_OPTIONS } from "./../../../Hooks/useFetch";
+// Hook imports
+import useFetch, { STATUS, DEFAULT_FETCH_OPTIONS } from "./useFetch";
 
-const openTriviaResponseCodes = {
+const OPEN_TRIVIA_RESPONSE_CODES = {
 	0: "Success",
 	1: "No Results",
 	2: "Invalid Parameter",
@@ -9,15 +10,18 @@ const openTriviaResponseCodes = {
 };
 
 function useOpenTriviaApi(endpoint, options = DEFAULT_FETCH_OPTIONS) {
-	
 	const url = "https://opentdb.com/" + endpoint;
 	const { status, error, response } = useFetch(url, options);
-	
+
 	if (status === STATUS.resolved) {
-		if (response.response_code !== openTriviaResponseCodes[0]) {
+		// The call to certain endpoints do not return a status code
+		// This is probably an oversight in the API design
+		if (!response.response_code) return { status, error, response };
+
+		if (response.response_code !== 0) {
 			return {
-				status: status,
-				error: openTriviaResponseCodes[response.response_code],
+				status: STATUS.rejected,
+				error: OPEN_TRIVIA_RESPONSE_CODES[response.response_code],
 				response: response,
 			};
 		}

@@ -1,91 +1,79 @@
+// Library imports
 import { createContext, useReducer, useEffect } from "react";
 
-import Home from "./Home";
-import HeaderBar from "./HeaderBar";
+// Component imports
 import PageNavButton from "./Components/PageNavButton";
-import TimesTableGame from "./Games/TimesTableGame/TimesTableGame";
-import ConnectFour from "./Games/ConnectFour/ConnectFour";
-import GeneralKnowledgeGame from "./Games/GeneralKnowledgeGame/GeneralKnowledgeGame";
+import Error from "./Components/Error";
 
-import reducer from "./Reducers/reducer";
+// State imports
+import reducer from "./State/reducer";
+import DEFAULT_STATE from "./State/defaultState";
+import PAGES from "./State/PAGES";
 
+// Hook imports
+import useLocalStorage from "./Hooks/useLocalStorage";
+
+// Page imports
+import Home from "./Home/Home";
+import TimesTableGame from "./TimesTableGame/TimesTableGame";
+import ConnectFour from "./ConnectFour/ConnectFour";
+import QuizApp from "./QuizGame/QuizApp";
+
+import HeaderBar from "./HeaderBar";
+
+// CSS
 import "./App.css";
 import "./Utility.css";
 
-export const globalState = createContext();
-
-const defaultState = {
-	siteSettings: {
-		darkMode: false,
-		page: "home",
-	},
-	user: {
-		name: "Nomad",
-		lastLogin: new Date(),
-		preferredGame: null,
-	},
-	games: {
-		timesTable: { timesPlayed: 0 },
-		connectFour: { timesPlayed: 0 },
-		generalKnowledge: {
-			timesPlayed: 0,
-			settings: {
-				numberOfQuestions: 10,
-				difficulty: "",
-				category: "",
-			},
-			answers: [],
-		},
-	},
-};
+export const globalContext = createContext();
 
 const localStorageKey = "USER_DATA";
 
 function App() {
-	const [state, dispatch] = useReducer(reducer, defaultState, (init) => {
-		return JSON.parse(localStorage.getItem(localStorageKey)) || init;
-	});
+	const [store, setStore] = useLocalStorage(localStorageKey, DEFAULT_STATE);
+	const [globalState, globalDispatch] = useReducer(reducer, store);
 
 	useEffect(() => {
-		localStorage.setItem(localStorageKey, JSON.stringify(state));
-	}, [state]);
+		setStore(globalState);
+	}, [globalState, setStore]);
 
 	useEffect(() => {
-		if (state.siteSettings.darkMode) {
+		if (globalState.darkMode) {
 			document.body.classList.add("dark-mode");
 		} else document.body.classList.remove("dark-mode");
-	});
+	}, [globalState.darkMode]);
 
 	let page;
 
-	switch (state.siteSettings.page) {
-		case "home":
+	switch (globalState.page) {
+		case PAGES.HOME:
 			page = <Home />;
 			break;
-		case "timesTableGame":
-			page = <TimesTableGame />;
-			break;
-		case "connectFour":
+		case PAGES.CONNECT_FOUR:
 			page = <ConnectFour />;
 			break;
-		case "generalKnowledgeGame":
-			page = <GeneralKnowledgeGame />;
+		case PAGES.QUIZ_GAME:
+			page = <QuizApp />;
+			break;
+		case PAGES.TIMES_TABLE_GAME:
+			page = <TimesTableGame />;
 			break;
 		default:
-			return new Error();
+			page = <Error />;
+			break;
 	}
 
 	return (
-		<globalState.Provider value={{ state, dispatch }}>
+		<globalContext.Provider value={{ globalState, globalDispatch }}>
 			<main className="flex-col full-width">
 				<HeaderBar />
 				{page}
-				{state.siteSettings.page !== "home" ? (
-					<PageNavButton page="home">Home</PageNavButton>
+				{globalState.page !== "home" ? ( // if page not home then no need for button
+					<PageNavButton page={PAGES.HOME}>Home</PageNavButton>
 				) : null}
 				<HeaderBar />
 			</main>
-		</globalState.Provider>
+		</globalContext.Provider>
 	);
 }
 
